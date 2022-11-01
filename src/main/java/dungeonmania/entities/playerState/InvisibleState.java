@@ -2,9 +2,22 @@ package dungeonmania.entities.playerState;
 
 import dungeonmania.entities.Player;
 
-public class InvisibleState extends PlayerState {
+public class InvisibleState implements PlayerState {
+    public Player player;
+    public boolean isInvisible = true;
+
+    
+    // public InvisibleState(Player player) {
+    //     super(player, false, true);
+    // }
+
     public InvisibleState(Player player) {
-        super(player, false, true);
+        this.player = player;
+    }
+    
+    @Override
+    public boolean isInvisible() {
+        return this.isInvisible;
     }
 
     @Override
@@ -24,4 +37,9 @@ public class InvisibleState extends PlayerState {
         Player player = getPlayer();
         player.changeState(new InvisibleState(player));
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }

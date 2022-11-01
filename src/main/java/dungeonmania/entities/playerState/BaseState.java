@@ -2,10 +2,15 @@ package dungeonmania.entities.playerState;
 
 import dungeonmania.entities.Player;
 
-public class BaseState extends PlayerState {
+public class BaseState implements PlayerState {
+    public Player player;
+
     public BaseState(Player player) {
-        super(player, false, false);
+        this.player = player;
     }
+    // public BaseState(Player player) {
+    //     super(player, false, false);
+    // }
 
     @Override
     public void transitionBase() {
@@ -22,5 +27,9 @@ public class BaseState extends PlayerState {
     public void transitionInvisible() {
         Player player = getPlayer();
         player.changeState(new InvisibleState(player));
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
