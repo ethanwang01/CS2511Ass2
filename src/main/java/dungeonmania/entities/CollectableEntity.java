@@ -6,7 +6,7 @@ import dungeonmania.map.GameMap;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
-public abstract class MovingEntity implements Entity {
+public abstract class CollectableEntity implements Entity {
     public static final int FLOOR_LAYER = 0;
     public static final int ITEM_LAYER = 1;
     public static final int DOOR_LAYER = 2;
@@ -17,8 +17,8 @@ public abstract class MovingEntity implements Entity {
     private Position previousDistinctPosition;
     private Direction facing;
     private String entityId;
-
-    public MovingEntity(Position position) {
+    
+    public CollectableEntity(Position position) {
         this.position = position;
         this.previousPosition = position;
         this.previousDistinctPosition = null;
@@ -84,20 +84,5 @@ public abstract class MovingEntity implements Entity {
     @Override
     public void setPosition(Position position) {
         this.position = position;
-    }
-    // use setPosition
-    @Deprecated(forRemoval = true)
-    public void translate(Direction direction) {
-        previousPosition = this.position;
-        this.position = Position.translateBy(this.position, direction);
-        if (!previousPosition.equals(this.position)) {
-            previousDistinctPosition = previousPosition;
-        }
-    }
-
-    // use setPosition
-    @Deprecated(forRemoval = true)
-    public void translate(Position offset) {
-        this.position = Position.translateBy(this.position, offset);
     }
 }
