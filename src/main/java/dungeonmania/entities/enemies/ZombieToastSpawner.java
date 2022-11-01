@@ -1,7 +1,6 @@
 package dungeonmania.entities.enemies;
 
 import dungeonmania.Game;
-import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.StaticEntity;

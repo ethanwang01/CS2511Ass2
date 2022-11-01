@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import dungeonmania.entities.CollectableEntity;
 import dungeonmania.entities.Entity;
-import dungeonmania.entities.MovingEntity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.Switch;
 import dungeonmania.entities.inventory.InventoryItem;
