@@ -17,7 +17,7 @@ public abstract class CollectableEntity implements Entity {
     private Position previousDistinctPosition;
     private Direction facing;
     private String entityId;
-    
+
     public CollectableEntity(Position position) {
         this.position = position;
         this.previousPosition = position;
@@ -84,5 +84,20 @@ public abstract class CollectableEntity implements Entity {
     @Override
     public void setPosition(Position position) {
         this.position = position;
+    }
+    // use setPosition
+    @Deprecated(forRemoval = true)
+    public void translate(Direction direction) {
+        previousPosition = this.position;
+        this.position = Position.translateBy(this.position, direction);
+        if (!previousPosition.equals(this.position)) {
+            previousDistinctPosition = previousPosition;
+        }
+    }
+
+    // use setPosition
+    @Deprecated(forRemoval = true)
+    public void translate(Position offset) {
+        this.position = Position.translateBy(this.position, offset);
     }
 }
