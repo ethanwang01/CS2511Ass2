@@ -34,14 +34,4 @@ public class ZombieToastSpawner extends StaticEntity implements Interactable {
     public boolean isInteractable(Player player) {
         return Position.isAdjacent(player.getPosition(), getPosition()) && player.hasWeapon();
     }
-
-    @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        return;
-    }
-
-    @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-        return;
-    }
 }

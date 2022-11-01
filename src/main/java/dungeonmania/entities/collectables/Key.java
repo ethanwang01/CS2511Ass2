@@ -28,17 +28,6 @@ public class Key extends CollectableEntity implements InventoryItem {
             map.destroyEntity(this);
         }
     }
-
-    @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-        return;
-    }
-
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
-
     public int getnumber() {
         return number;
     }
