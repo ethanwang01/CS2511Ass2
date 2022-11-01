@@ -72,6 +72,9 @@ public class Player extends Entity implements Battleable {
                 if (((Mercenary) entity).isAllied()) return;
             }
             map.getGame().battle(this, (Enemy) entity);
+        } else {
+            this.pickUp(entity);
+            // map.destroyEntity(entity);
         }
     }
 
