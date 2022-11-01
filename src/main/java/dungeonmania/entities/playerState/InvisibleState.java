@@ -6,14 +6,13 @@ public class InvisibleState implements PlayerState {
     public Player player;
     public boolean isInvisible = true;
 
-    
-    // public InvisibleState(Player player) {
-    //     super(player, false, true);
-    // }
-
     public InvisibleState(Player player) {
         this.player = player;
     }
+
+    // public InvisibleState(Player player) {
+    //     super(player, false, true);
+    // }
     
     @Override
     public boolean isInvisible() {
