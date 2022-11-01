@@ -8,11 +8,12 @@ import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 import dungeonmania.battles.Battleable;
 import dungeonmania.entities.Entity;
+import dungeonmania.entities.MovingEntity;
 import dungeonmania.entities.Player;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public abstract class Enemy extends Entity implements Battleable {
+public abstract class Enemy extends MovingEntity implements Battleable {
     private BattleStatistics battleStatistics;
     private Random randGen = new Random();
 

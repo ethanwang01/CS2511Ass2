@@ -4,10 +4,11 @@ import dungeonmania.Game;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.StaticEntity;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class ZombieToastSpawner extends Entity implements Interactable {
+public class ZombieToastSpawner extends StaticEntity implements Interactable {
     public static final int DEFAULT_SPAWN_INTERVAL = 0;
 
     public ZombieToastSpawner(Position position, int spawnInterval) {
