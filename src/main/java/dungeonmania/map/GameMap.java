@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import dungeonmania.Game;
 import dungeonmania.entities.Entity;
+import dungeonmania.entities.MovingEntity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.Portal;
 import dungeonmania.entities.Switch;
@@ -93,10 +94,12 @@ public class GameMap {
     }
 
     public void moveTo(Entity entity, Direction direction) {
+        if (!(entity instanceof MovingEntity)) return;
         if (!canMoveTo(entity, Position.translateBy(entity.getPosition(), direction))) return;
+        MovingEntity entityMov = (MovingEntity) entity;
         triggerMovingAwayEvent(entity);
         removeNode(entity);
-        entity.translate(direction);
+        entityMov.translate(direction);
         addEntity(entity);
         triggerOverlapEvent(entity);
     }
