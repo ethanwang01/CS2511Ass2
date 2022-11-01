@@ -46,8 +46,6 @@ public abstract class CollectableEntity implements Entity {
         return this.previousPosition;
     }
 
-    
-
     @Override
     public boolean canMoveOnto(GameMap map, Entity entity) {
         return false;
@@ -56,21 +54,18 @@ public abstract class CollectableEntity implements Entity {
     @Override
     public void onDestroy(GameMap map) {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void onMovedAway(GameMap map, Entity entity) {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
-        
+        // TODO
     }
 
-    
     @Override
     public Direction getFacing() {
         return this.facing;
