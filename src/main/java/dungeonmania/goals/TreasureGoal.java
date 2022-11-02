@@ -13,5 +13,13 @@ public class TreasureGoal extends LeafGoal {
     public boolean achieved(Game game) {
         return game.getInitialTreasureCount() - game.getMap().getEntities(Treasure.class).size() >= this.getTarget();
     }
+
+    @Override
+    public String toString(Game game) {
+        if (this.achieved(game)) {
+            return "";
+        }
+        return ":treasure";
+    }
     
 }

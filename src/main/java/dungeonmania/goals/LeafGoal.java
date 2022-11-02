@@ -27,6 +27,6 @@ public class LeafGoal implements Goal{
     
     @Override
     public String toString(Game game) {
-        return ":" + this.type;
+        return "" ;
     }
 }

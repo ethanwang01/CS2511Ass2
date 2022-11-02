@@ -25,5 +25,13 @@ public class ExitGoal extends LeafGoal {
                     .map(Entity::getPosition)
                     .anyMatch(pos::equals);
     }
+
+    @Override
+    public String toString(Game game) {
+        if (this.achieved(game)) {
+            return "";
+        }
+        return ":exit";
+    }
     
 }
