@@ -16,10 +16,10 @@ public class BoulderGoal extends LeafGoal {
 
     @Override
     public String toString(Game game) {
-        if (this.achieved(game)){
+        if (this.achieved(game)) {
             return "";
         }
         return ":boulders";
     }
-    
+
 }

@@ -2,7 +2,7 @@ package dungeonmania.goals;
 
 import dungeonmania.Game;
 
-public class LeafGoal implements Goal{
+public class LeafGoal implements Goal {
     private String type;
     private Integer target;
 
@@ -21,12 +21,11 @@ public class LeafGoal implements Goal{
 
     @Override
     public boolean achieved(Game game) {
-        // TODO Auto-generated method stub
         return false;
     }
-    
+
     @Override
     public String toString(Game game) {
-        return "" ;
+        return "";
     }
 }
