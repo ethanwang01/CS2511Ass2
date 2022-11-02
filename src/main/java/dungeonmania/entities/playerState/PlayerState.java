@@ -3,9 +3,22 @@ package dungeonmania.entities.playerState;
 import dungeonmania.entities.Player;
 
 public interface PlayerState {
-    void transitionBase();
-    void transitionInvincible();
-    void transitionInvisible();
+    Player getPlayer();
+    // void transitionBase();
+    default void transitionBase() {
+        Player player = getPlayer();
+        player.changeState(new BaseState(player));
+    }
+    // void transitionInvincible();
+    default void transitionInvincible() {
+        Player player = getPlayer();
+        player.changeState(new InvincibleState(player));
+    }
+    // void transitionInvisible();
+    default void transitionInvisible() {
+        Player player = getPlayer();
+        player.changeState(new InvisibleState(player));
+    }
     default boolean isInvincible() {
         return false;
     }

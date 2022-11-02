@@ -17,18 +17,6 @@ public class BaseState implements PlayerState {
         // Do nothing
     }
 
-    @Override
-    public void transitionInvincible() {
-        Player player = getPlayer();
-        player.changeState(new InvincibleState(player));
-    }
-
-    @Override
-    public void transitionInvisible() {
-        Player player = getPlayer();
-        player.changeState(new InvisibleState(player));
-    }
-
     public Player getPlayer() {
         return player;
     }
