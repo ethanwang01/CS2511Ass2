@@ -18,6 +18,14 @@ public class Boulder extends MovingEntity {
         return false;
     }
 
+    public void onDestroy(GameMap map) {
+        return;
+    }
+
+    public void onMovedAway(GameMap map, Entity entity) {
+        return;
+    }
+
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (entity instanceof Player) {

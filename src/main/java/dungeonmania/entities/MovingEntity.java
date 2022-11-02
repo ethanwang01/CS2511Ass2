@@ -47,24 +47,16 @@ public abstract class MovingEntity implements Entity {
     }
 
     @Override
-    public boolean canMoveOnto(GameMap map, Entity entity) {
-        return false;
-    }
+    public abstract boolean canMoveOnto(GameMap map, Entity entity);
 
     @Override
-    public void onDestroy(GameMap map) {
-        // TODO Auto-generated method stub
-    }
+    public abstract void onDestroy(GameMap map);
 
     @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-        // TODO Auto-generated method stub
-    }
+    public abstract void onMovedAway(GameMap map, Entity entity);
 
     @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        // TODO
-    }
+    public abstract void onOverlap(GameMap map, Entity entity);
 
     @Override
     public Direction getFacing() {
