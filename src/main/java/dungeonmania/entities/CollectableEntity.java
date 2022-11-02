@@ -48,7 +48,7 @@ public abstract class CollectableEntity implements Entity {
 
     @Override
     public boolean canMoveOnto(GameMap map, Entity entity) {
-        return false;
+        return true;
     }
 
     @Override
@@ -63,7 +63,10 @@ public abstract class CollectableEntity implements Entity {
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
-        // TODO
+        if (entity instanceof Player) {
+            if (!((Player) entity).pickUp(this)) return;
+            map.destroyEntity(this);
+        }
     }
 
     @Override

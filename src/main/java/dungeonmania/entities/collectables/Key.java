@@ -15,18 +15,19 @@ public class Key extends CollectableEntity implements InventoryItem {
         this.number = number;
     }
 
-    @Override
-    public boolean canMoveOnto(GameMap map, Entity entity) {
-        return true;
-    }
+    // @Override
+    // public boolean canMoveOnto(GameMap map, Entity entity) {
+    //     return true;
+    // }
 
-    @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        if (entity instanceof Player) {
-            if (!((Player) entity).pickUp(this)) return;
-            map.destroyEntity(this);
-        }
-    }
+    // @Override
+    // public void onOverlap(GameMap map, Entity entity) {
+    //     if (entity instanceof Player) {
+    //         if (!((Player) entity).pickUp(this)) return;
+    //         map.destroyEntity(this);
+    //     }
+    // }
+
     public int getnumber() {
         return number;
     }
