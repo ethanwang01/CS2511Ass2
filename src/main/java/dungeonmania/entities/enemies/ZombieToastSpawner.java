@@ -1,7 +1,6 @@
 package dungeonmania.entities.enemies;
 
 import dungeonmania.Game;
-import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.StaticEntity;
@@ -33,15 +32,5 @@ public class ZombieToastSpawner extends StaticEntity implements Interactable {
     @Override
     public boolean isInteractable(Player player) {
         return Position.isAdjacent(player.getPosition(), getPosition()) && player.hasWeapon();
-    }
-
-    @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        return;
-    }
-
-    @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-        return;
     }
 }

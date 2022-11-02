@@ -53,9 +53,4 @@ public class Switch extends StaticEntity {
     public boolean isActivated() {
         return activated;
     }
-
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
 }
