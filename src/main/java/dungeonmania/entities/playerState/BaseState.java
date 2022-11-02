@@ -3,7 +3,7 @@ package dungeonmania.entities.playerState;
 import dungeonmania.entities.Player;
 
 public class BaseState implements PlayerState {
-    public Player player;
+    private Player player;
 
     public BaseState(Player player) {
         this.player = player;

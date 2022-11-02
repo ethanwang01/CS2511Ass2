@@ -21,5 +21,5 @@ public class TreasureGoal extends LeafGoal {
         }
         return ":treasure";
     }
-    
+
 }
