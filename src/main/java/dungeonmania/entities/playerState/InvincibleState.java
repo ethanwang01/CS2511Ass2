@@ -10,13 +10,8 @@ public class InvincibleState implements PlayerState {
         this.player = player;
     }
 
-    // public InvincibleState(Player player) {
-    //     super(player, true, false);
-    // }
-
     public boolean isInvincible() {
         return true;
-        // return this.isInvincible;
     }
     
     public Player getPlayer() {

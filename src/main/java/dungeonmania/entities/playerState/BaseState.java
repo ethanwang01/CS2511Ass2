@@ -8,9 +8,6 @@ public class BaseState implements PlayerState {
     public BaseState(Player player) {
         this.player = player;
     }
-    // public BaseState(Player player) {
-    //     super(player, false, false);
-    // }
 
     @Override
     public void transitionBase() {
