@@ -48,22 +48,25 @@ public abstract class CollectableEntity implements Entity {
 
     @Override
     public boolean canMoveOnto(GameMap map, Entity entity) {
-        return false;
+        return true;
     }
 
     @Override
     public void onDestroy(GameMap map) {
-        // TODO Auto-generated method stub
+        return;
     }
 
     @Override
     public void onMovedAway(GameMap map, Entity entity) {
-        // TODO Auto-generated method stub
+        return;
     }
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
-        // TODO
+        if (entity instanceof Player) {
+            if (!((Player) entity).pickUp(this)) return;
+            map.destroyEntity(this);
+        }
     }
 
     @Override

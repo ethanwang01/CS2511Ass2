@@ -33,5 +33,5 @@ public class ExitGoal extends LeafGoal {
         }
         return ":exit";
     }
-    
+
 }

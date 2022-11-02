@@ -40,10 +40,10 @@ public class Bomb extends CollectableEntity implements InventoryItem {
         explode(map);
     }
 
-    @Override
-    public boolean canMoveOnto(GameMap map, Entity entity) {
-        return true;
-    }
+    // @Override
+    // public boolean canMoveOnto(GameMap map, Entity entity) {
+    //     return true;
+    // }
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
