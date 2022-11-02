@@ -53,12 +53,12 @@ public abstract class CollectableEntity implements Entity {
 
     @Override
     public void onDestroy(GameMap map) {
-        // TODO Auto-generated method stub
+        return;
     }
 
     @Override
     public void onMovedAway(GameMap map, Entity entity) {
-        // TODO Auto-generated method stub
+        return;
     }
 
     @Override

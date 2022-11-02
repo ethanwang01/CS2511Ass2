@@ -52,13 +52,19 @@ public abstract class StaticEntity implements Entity {
     }
 
     @Override
-    public abstract void onDestroy(GameMap map);
+    public void onDestroy(GameMap map) {
+        return;
+    }
 
     @Override
-    public abstract void onMovedAway(GameMap map, Entity entity);
+    public void onMovedAway(GameMap map, Entity entity) {
+        return;
+    }
 
     @Override
-    public abstract void onOverlap(GameMap map, Entity entity);
+    public void onOverlap(GameMap map, Entity entity) {
+        return;
+    }
 
     @Override
     public Direction getFacing() {

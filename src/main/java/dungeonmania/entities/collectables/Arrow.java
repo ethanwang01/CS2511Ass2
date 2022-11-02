@@ -4,7 +4,6 @@ import dungeonmania.entities.CollectableEntity;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.inventory.InventoryItem;
-import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
 public class Arrow extends CollectableEntity implements InventoryItem {
