@@ -46,17 +46,18 @@ public class Mercenary extends Enemy implements Interactable {
     /**
      * bribe the merc
      */
-    private void bribe(Player player) {
+    private boolean bribe(Player player) {
         for (int i = 0; i < bribeAmount; i++) {
             player.use(Treasure.class);
         }
-
+        return true;
     }
 
     @Override
     public void interact(Player player, Game game) {
-        allied = true;
-        bribe(player);
+        if (bribe(player)) {
+            allied = true;
+        }
     }
 
     @Override

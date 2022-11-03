@@ -103,6 +103,15 @@ public class EntityFactory {
         return new Mercenary(pos, mercenaryHealth, mercenaryAttack, mercenaryBribeAmount, mercenaryBribeRadius);
     }
 
+    public Assassin buildAssassin(Position pos) {
+        double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
+        double assassinAttack = config.optDouble("assassin_attack", Assassin.DEFAULT_ATTACK);
+        int assassinBribeAmount = config.optInt("bribe_amount", Assassin.DEFAULT_BRIBE_AMOUNT);
+        int assassinBribeRadius = config.optInt("bribe_radius", Assassin.DEFAULT_BRIBE_RADIUS);
+
+        return new Assassin(pos, assassinHealth, assassinAttack, assassinBribeAmount, assassinBribeRadius);
+    }
+
     public Bow buildBow() {
         int bowDurability = config.optInt("bow_durability");
         return new Bow(bowDurability);
@@ -126,6 +135,8 @@ public class EntityFactory {
             return buildZombieToastSpawner(pos);
         case "mercenary":
             return buildMercenary(pos);
+        case "assassin":
+            return buildAssassin(pos);
         case "wall":
             return new Wall(pos);
         case "boulder":

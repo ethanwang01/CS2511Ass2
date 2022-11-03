@@ -48,6 +48,7 @@ public abstract class Enemy extends MovingEntity implements Battleable {
     @Override
     public void onDestroy(GameMap map) {
         Game g = map.getGame();
+        g.setKilledEnemies(g.getKilledEnemies() + 1);
         g.unsubscribe(getId());
     }
 
