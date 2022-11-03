@@ -26,6 +26,7 @@ public class Game {
     private Player player;
     private BattleFacade battleFacade;
     private int initialTreasureCount;
+    private int initialEnemyCount;
     private EntityFactory entityFactory;
     private boolean isInTick = false;
     public static final int PLAYER_MOVEMENT = 0;
@@ -50,6 +51,7 @@ public class Game {
         player = map.getPlayer();
         register(() -> player.onTick(tickCount), PLAYER_MOVEMENT, "potionQueue");
         initialTreasureCount = map.getEntities(Treasure.class).size();
+        initialEnemyCount = map.getEntities(Enemy.class).size();
     }
 
     public Game tick(Direction movementDirection) {
@@ -219,6 +221,10 @@ public class Game {
 
     public int getInitialTreasureCount() {
         return initialTreasureCount;
+    }
+
+    public int getInitialEnemyCount() {
+        return initialEnemyCount;
     }
 
 }
