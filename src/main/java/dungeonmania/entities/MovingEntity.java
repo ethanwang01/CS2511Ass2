@@ -76,7 +76,11 @@ public abstract class MovingEntity implements Entity {
 
     @Override
     public void setPosition(Position position) {
+        this.previousPosition = this.position;
         this.position = position;
+        if (!previousPosition.equals(this.position)) {
+            this.previousDistinctPosition = this.previousPosition;
+        }
     }
     // use setPosition
     @Deprecated(forRemoval = true)
@@ -91,6 +95,10 @@ public abstract class MovingEntity implements Entity {
     // use setPosition
     @Deprecated(forRemoval = true)
     public void translate(Position offset) {
+        previousPosition = this.position;
         this.position = Position.translateBy(this.position, offset);
+        if (!previousPosition.equals(this.position)) {
+            previousDistinctPosition = previousPosition;
+        }
     }
 }

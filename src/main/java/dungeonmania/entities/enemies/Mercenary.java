@@ -50,7 +50,7 @@ public class Mercenary extends Enemy implements Interactable {
         for (int i = 0; i < bribeAmount; i++) {
             player.use(Treasure.class);
         }
-
+        System.out.println("bribe");
     }
 
     @Override
@@ -63,12 +63,41 @@ public class Mercenary extends Enemy implements Interactable {
     public void move(Game game) {
         Position nextPos;
         GameMap map = game.getMap();
-        if (allied) {
-            moveRandom(game);
+        // if !allied
+        if (!allied) {
+             // if dijkstra path is same as position player moves to, stay
+            if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this)
+                .equals(map.getPlayer().getPosition())) {
+                System.out.println("Cannot move \n");
+                map.moveTo(this, this.getPosition());
+                return;
+            } else {
+                System.out.print("Dijk move \n");
+                nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
+                map.moveTo(this, nextPos);
+            }
+        // if allied
         } else {
-            // Follow hostile
-            nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
-            map.moveTo(this, nextPos);
+            // if curr position is not adjacent to player before they move
+            if (!Position.isAdjacent(this.getPosition(), map.getPlayer().getPreviousPosition())) {
+                // if dijkstra path is same as position player moves to, stay
+                if (map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this)
+                    .equals(map.getPlayer().getPosition())) {
+                    System.out.println("Stay\n");
+                    map.moveTo(this, this.getPosition());
+                } else {
+                    System.out.println("dijk move ally\n");
+                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+                }
+            // if curr position is adjacent to player before they move, follow player's last distinct position
+            } else {
+                System.out.println("follow player");
+                map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
+            }
+            System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
+            System.out.print("Player curr: " + map.getPlayer().getPosition() + "\n");
+            System.out.print("Player prevdist: " + map.getPlayer().getPreviousDistinctPosition() + "\n");
+            System.out.print("merc curr: " + this.getPosition() + "\n");
         }
     }
 

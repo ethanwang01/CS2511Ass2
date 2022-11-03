@@ -84,7 +84,10 @@ public class GameMap {
     }
 
     public void moveTo(Entity entity, Position position) {
-        if (!canMoveTo(entity, position)) return;
+        if (!canMoveTo(entity, position)) {
+            System.out.print("Cant move");
+            return;
+        }
 
         triggerMovingAwayEvent(entity);
         removeNode(entity);
@@ -99,7 +102,7 @@ public class GameMap {
         MovingEntity entityMov = (MovingEntity) entity;
         triggerMovingAwayEvent(entity);
         removeNode(entity);
-        entityMov.translate(direction);
+        entityMov.setPosition(Position.translateBy(entity.getPosition(), direction));
         addEntity(entity);
         triggerOverlapEvent(entity);
     }
