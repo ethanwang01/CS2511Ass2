@@ -22,7 +22,7 @@ public class ComplexGoalsTest {
         assertTrue(TestUtils.getGoals(res).contains(":exit"));
         assertTrue(TestUtils.getGoals(res).contains(":treasure"));
         assertTrue(TestUtils.getGoals(res).contains(":boulders"));
- 
+
         // kill spider
         res = dmc.tick(Direction.RIGHT);
         assertTrue(TestUtils.getGoals(res).contains(":exit"));

@@ -46,17 +46,17 @@ public class EnemyGoalsTest {
         // assert goal not met
         assertTrue(TestUtils.getGoals(res).contains(":enemies"));
         assertTrue(TestUtils.getGoals(res).contains(":exit"));
-        
+
         // move player to Left
         res = dmc.tick(Direction.LEFT);
-        
+
         // assert goal not met
         assertTrue(TestUtils.getGoals(res).contains(":enemies"));
         assertTrue(TestUtils.getGoals(res).contains(":exit"));
-        
+
         // move player to Left to kill a spider
         res = dmc.tick(Direction.LEFT);
-        
+
         // assert goal not met
         assertTrue(TestUtils.getGoals(res).contains(":enemies"));
         assertTrue(TestUtils.getGoals(res).contains(":exit"));
@@ -66,7 +66,7 @@ public class EnemyGoalsTest {
         res = dmc.tick(Direction.RIGHT);
         res = dmc.tick(Direction.RIGHT);
         res = dmc.tick(Direction.RIGHT);
-        
+
         res = dmc.tick(Direction.DOWN);
         res = dmc.tick(Direction.DOWN);
         res = dmc.tick(Direction.DOWN);

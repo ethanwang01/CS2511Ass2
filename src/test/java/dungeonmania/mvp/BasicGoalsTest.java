@@ -139,7 +139,7 @@ public class BasicGoalsTest {
 
         // move player to right
         res = dmc.tick(Direction.RIGHT);
-        
+
         // assert goal not met
         assertTrue(TestUtils.getGoals(res).contains(":enemies"));
 
