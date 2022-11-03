@@ -134,31 +134,14 @@ public class BasicGoalsTest {
         dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("d_basicGoalsTest_enemy", "c_basicGoalsTest_enemy");
 
+        // assert goal not met
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
+
         // move player to right
         res = dmc.tick(Direction.RIGHT);
-
+        
         // assert goal not met
-        assertTrue(TestUtils.getGoals(res).contains(":enemy"));
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
 
-        // collect treasure
-        res = dmc.tick(Direction.RIGHT);
-        assertEquals(1, TestUtils.getInventory(res, "treasure").size());
-
-        // assert goal not met
-        assertTrue(TestUtils.getGoals(res).contains(":treasure"));
-
-        // collect treasure
-        res = dmc.tick(Direction.RIGHT);
-        assertEquals(2, TestUtils.getInventory(res, "treasure").size());
-
-        // assert goal not met
-        assertTrue(TestUtils.getGoals(res).contains(":treasure"));
-
-        // collect treasure
-        res = dmc.tick(Direction.RIGHT);
-        assertEquals(3, TestUtils.getInventory(res, "treasure").size());
-
-        // assert goal met
-        assertEquals("", TestUtils.getGoals(res));
     }
 }

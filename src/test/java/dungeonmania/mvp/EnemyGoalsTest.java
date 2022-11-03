@@ -20,13 +20,89 @@ public class EnemyGoalsTest {
         DungeonResponse res = dmc.newGame("d_basicGoalsTest_enemy", "c_basicGoalsTest_enemy");
 
         // assert goal not met
-        assertTrue(TestUtils.getGoals(res).contains(":enemy"));
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
 
-        // move player to right
-        res = dmc.tick(Direction.RIGHT);
+        // move player to Left
+        res = dmc.tick(Direction.LEFT);
 
         // assert goal not met
-        assertTrue(TestUtils.getGoals(res).contains(":enemy"));
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
 
+        // move player to Left to kill a spider
+        res = dmc.tick(Direction.LEFT);
+
+        // assert goal met
+        assertFalse(TestUtils.getGoals(res).contains(":enemies"));
+    }
+
+    @Test
+    @Tag("14-2")
+    @DisplayName("Testing a map with both enemy goal and exit")
+    public void allEnemy() {
+        DungeonManiaController dmc;
+        dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_basicGoalsTest_allEnemy", "c_basicGoalsTest_allEnemy");
+
+        // assert goal not met
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
+        assertTrue(TestUtils.getGoals(res).contains(":exit"));
+        
+        // move player to Left
+        res = dmc.tick(Direction.LEFT);
+        
+        // assert goal not met
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
+        assertTrue(TestUtils.getGoals(res).contains(":exit"));
+        
+        // move player to Left to kill a spider
+        res = dmc.tick(Direction.LEFT);
+        
+        // assert goal not met
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
+        assertTrue(TestUtils.getGoals(res).contains(":exit"));
+
+        // move player to Right to position to kill other spider
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+        
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+
+        // assert goal not met
+        assertTrue(TestUtils.getGoals(res).contains(":enemies"));
+        assertTrue(TestUtils.getGoals(res).contains(":exit"));
+
+        res = dmc.tick(Direction.RIGHT);
+
+        // assert goal met
+        assertFalse(TestUtils.getGoals(res).contains(":enemies"));
+        assertTrue(TestUtils.getGoals(res).contains(":exit"));
+
+        // Go to exit
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.UP);
+        res = dmc.tick(Direction.UP);
+
+        res = dmc.tick(Direction.LEFT);
+        res = dmc.tick(Direction.LEFT);
+        res = dmc.tick(Direction.LEFT);
+        res = dmc.tick(Direction.LEFT);
+        res = dmc.tick(Direction.LEFT);
+        res = dmc.tick(Direction.LEFT);
+
+        // assert all goals met
+        assertFalse(TestUtils.getGoals(res).contains(":enemies"));
+        assertFalse(TestUtils.getGoals(res).contains(":exit"));
     }
 }
