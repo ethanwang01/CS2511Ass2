@@ -104,12 +104,13 @@ public class EntityFactory {
     }
 
     public Assassin buildAssassin(Position pos) {
-        double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
         double assassinAttack = config.optDouble("assassin_attack", Assassin.DEFAULT_ATTACK);
-        int assassinBribeAmount = config.optInt("bribe_amount", Assassin.DEFAULT_BRIBE_AMOUNT);
+        int assassinBribeAmount = config.optInt("assassin_bribe_amount", Assassin.DEFAULT_BRIBE_AMOUNT);
+        double assassinBribeFailRate = config.optDouble("assassin_bribe_fail_rate", Assassin.DEFAULT_BRIBE_RATE);
+        double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
         int assassinBribeRadius = config.optInt("bribe_radius", Assassin.DEFAULT_BRIBE_RADIUS);
-
-        return new Assassin(pos, assassinHealth, assassinAttack, assassinBribeAmount, assassinBribeRadius);
+        return new Assassin(pos, assassinHealth, assassinAttack, assassinBribeAmount, assassinBribeRadius,
+            assassinBribeFailRate);
     }
 
     public Bow buildBow() {

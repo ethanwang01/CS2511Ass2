@@ -8,7 +8,7 @@ import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Mercenary extends MercenaryParent implements Interactable {
+public abstract class MercenaryParent extends Enemy implements Interactable {
     public static final int DEFAULT_BRIBE_AMOUNT = 1;
     public static final int DEFAULT_BRIBE_RADIUS = 1;
     public static final double DEFAULT_ATTACK = 5.0;
@@ -18,8 +18,8 @@ public class Mercenary extends MercenaryParent implements Interactable {
     private int bribeRadius = Mercenary.DEFAULT_BRIBE_RADIUS;
     private boolean allied = false;
 
-    public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius) {
-        super(position, health, attack, bribeAmount, bribeRadius);
+    public MercenaryParent(Position position, double health, double attack, int bribeAmount, int bribeRadius) {
+        super(position, health, attack);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
     }
@@ -30,7 +30,7 @@ public class Mercenary extends MercenaryParent implements Interactable {
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
-        if (allied) return;
+        if (this.allied) return;
         super.onOverlap(map, entity);
     }
 

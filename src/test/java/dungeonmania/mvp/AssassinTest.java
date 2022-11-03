@@ -15,84 +15,84 @@ public class AssassinTest {
 
     @Test
     @Tag("12-1")
-    @DisplayName("Test mercenary in line with Player moves towards them")
+    @DisplayName("Test Assassin in line with Player moves towards them")
     public void simpleMovement() {
         //                                  Wall    Wall   Wall    Wall    Wall    Wall
         // P1       P2      P3      P4      M4      M3      M2      M1      .      Wall
         //                                  Wall    Wall   Wall    Wall    Wall    Wall
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_simpleMovement", "c_mercenaryTest_simpleMovement");
+        DungeonResponse res = dmc.newGame("d_assassinTest_simpleMovement", "c_assassinTest_simpleMovement");
 
-        assertEquals(new Position(8, 1), getMercPos(res));
+        assertEquals(new Position(8, 1), getAssassinPos(res));
         res = dmc.tick(Direction.RIGHT);
-        assertEquals(new Position(7, 1), getMercPos(res));
+        assertEquals(new Position(7, 1), getAssassinPos(res));
         res = dmc.tick(Direction.RIGHT);
-        assertEquals(new Position(6, 1), getMercPos(res));
+        assertEquals(new Position(6, 1), getAssassinPos(res));
         res = dmc.tick(Direction.RIGHT);
-        assertEquals(new Position(5, 1), getMercPos(res));
+        assertEquals(new Position(5, 1), getAssassinPos(res));
     }
 
     @Test
     @Tag("12-2")
-    @DisplayName("Test mercenary stops if they cannot move any closer to the player")
+    @DisplayName("Test Assassin stops if they cannot move any closer to the player")
     public void stopMovement() {
         //                  Wall     Wall    Wall
         // P1       P2      Wall      M1     Wall
         //                  Wall     Wall    Wall
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_stopMovement", "c_mercenaryTest_stopMovement");
+        DungeonResponse res = dmc.newGame("d_assassinTest_stopMovement", "c_assassinTest_stopMovement");
 
-        Position startingPos = getMercPos(res);
+        Position startingPos = getAssassinPos(res);
         res = dmc.tick(Direction.RIGHT);
-        assertEquals(startingPos, getMercPos(res));
+        assertEquals(startingPos, getAssassinPos(res));
     }
 
     @Test
     @Tag("12-3")
-    @DisplayName("Test mercenaries can not move through closed doors")
+    @DisplayName("Test assassin can not move through closed doors")
     public void doorMovement() {
         //                  Wall     Door    Wall
         // P1       P2      Wall      M1     Wall
         // Key              Wall     Wall    Wall
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_doorMovement", "c_mercenaryTest_doorMovement");
+        DungeonResponse res = dmc.newGame("d_assassinTest_doorMovement", "c_assassinTest_doorMovement");
 
-        Position startingPos = getMercPos(res);
+        Position startingPos = getAssassinPos(res);
         res = dmc.tick(Direction.RIGHT);
-        assertEquals(startingPos, getMercPos(res));
+        assertEquals(startingPos, getAssassinPos(res));
     }
 
     @Test
     @Tag("12-4")
-    @DisplayName("Test mercenary moves around a wall to get to the player")
+    @DisplayName("Test assassin moves around a wall to get to the player")
     public void evadeWall() {
         //                  Wall      M2
         // P1       P2      Wall      M1
         //                  Wall      M2
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_evadeWall", "c_mercenaryTest_evadeWall");
+        DungeonResponse res = dmc.newGame("d_assassinTest_evadeWall", "c_assassinTest_evadeWall");
 
         res = dmc.tick(Direction.RIGHT);
-        assertTrue(new Position(4, 1).equals(getMercPos(res))
-            || new Position(4, 3).equals(getMercPos(res)));
+        assertTrue(new Position(4, 1).equals(getAssassinPos(res))
+            || new Position(4, 3).equals(getAssassinPos(res)));
     }
 
     @Test
     @Tag("12-5")
-    @DisplayName("Testing a mercenary can be bribed with a certain amount")
+    @DisplayName("Testing a assassin can be bribed with a certain amount")
     public void bribeAmount() {
         //                                                          Wall     Wall     Wall    Wall    Wall
         // P1       P2/Treasure      P3/Treasure    P4/Treasure      M4       M3       M2     M1      Wall
         //                                                          Wall     Wall     Wall    Wall    Wall
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_bribeAmount", "c_mercenaryTest_bribeAmount");
+        DungeonResponse res = dmc.newGame("d_assassinTest_bribeAmount", "c_assassinTest_bribeAmount");
 
-        String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
+        String mercId = TestUtils.getEntitiesStream(res, "assassin").findFirst().get().getId();
 
         // pick up first treasure
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "treasure").size());
-        assertEquals(new Position(7, 1), getMercPos(res));
+        assertEquals(new Position(7, 1), getAssassinPos(res));
 
         // attempt bribe
         assertThrows(InvalidActionException.class, () ->
@@ -103,7 +103,7 @@ public class AssassinTest {
         // pick up second treasure
         res = dmc.tick(Direction.RIGHT);
         assertEquals(2, TestUtils.getInventory(res, "treasure").size());
-        assertEquals(new Position(6, 1), getMercPos(res));
+        assertEquals(new Position(6, 1), getAssassinPos(res));
 
         // attempt bribe
         assertThrows(InvalidActionException.class, () ->
@@ -114,7 +114,7 @@ public class AssassinTest {
         // pick up third treasure
         res = dmc.tick(Direction.RIGHT);
         assertEquals(3, TestUtils.getInventory(res, "treasure").size());
-        assertEquals(new Position(5, 1), getMercPos(res));
+        assertEquals(new Position(5, 1), getAssassinPos(res));
 
         // achieve bribe
         res = assertDoesNotThrow(() -> dmc.interact(mercId));
@@ -123,20 +123,20 @@ public class AssassinTest {
 
     @Test
     @Tag("12-6")
-    @DisplayName("Testing a mercenary can be bribed within a radius")
+    @DisplayName("Testing a assassin can be bribed within a radius")
     public void bribeRadius() {
         //                                         Wall     Wall    Wall    Wall  Wall
         // P1       P2/Treasure      P3    P4      M4       M3       M2     M1    Wall
         //                                         Wall     Wall    Wall    Wall  Wall
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_bribeRadius", "c_mercenaryTest_bribeRadius");
+        DungeonResponse res = dmc.newGame("d_assassinTest_bribeRadius", "c_assassinTest_bribeRadius");
 
-        String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
+        String mercId = TestUtils.getEntitiesStream(res, "assassin").findFirst().get().getId();
 
         // pick up treasure
         res = dmc.tick(Direction.RIGHT);
         assertEquals(1, TestUtils.getInventory(res, "treasure").size());
-        assertEquals(new Position(7, 1), getMercPos(res));
+        assertEquals(new Position(7, 1), getAssassinPos(res));
 
         // attempt bribe
         assertDoesNotThrow(() -> dmc.interact(mercId));
@@ -145,15 +145,15 @@ public class AssassinTest {
 
     @Test
     @Tag("12-7")
-    @DisplayName("Testing an allied mercenary does not battle the player")
+    @DisplayName("Testing an allied assassin does not battle the player")
     public void allyBattle() {
         //                                  Wall    Wall    Wall
         // P1       P2/Treasure      .      M2      M1      Wall
         //                                  Wall    Wall    Wall
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("d_mercenaryTest_allyBattle", "c_mercenaryTest_allyBattle");
+        DungeonResponse res = dmc.newGame("d_assassinTest_allyBattle", "c_assassinTest_allyBattle");
 
-        String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
+        String mercId = TestUtils.getEntitiesStream(res, "assassin").findFirst().get().getId();
 
         // pick up treasure
         res = dmc.tick(Direction.RIGHT);
@@ -168,7 +168,7 @@ public class AssassinTest {
         assertEquals(0, res.getBattles().size());
     }
 
-    private Position getMercPos(DungeonResponse res) {
-        return TestUtils.getEntities(res, "mercenary").get(0).getPosition();
+    private Position getAssassinPos(DungeonResponse res) {
+        return TestUtils.getEntities(res, "assassin").get(0).getPosition();
     }
 }
