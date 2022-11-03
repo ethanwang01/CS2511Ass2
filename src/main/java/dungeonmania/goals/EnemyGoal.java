@@ -4,7 +4,7 @@ import dungeonmania.Game;
 import dungeonmania.entities.enemies.Enemy;
 
 public class EnemyGoal extends LeafGoal {
-    
+
     public EnemyGoal(String type, Integer target) {
         super(type, target);
     }

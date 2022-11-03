@@ -159,7 +159,6 @@ public class EntityFactory {
             int swordDurability = config.optInt("sword_durability", Sword.DEFAULT_DURABILITY);
             return new Sword(pos, swordAttack, swordDurability);
         case "spider":
-            
             return buildSpider(pos);
         case "door":
             return new Door(pos, jsonEntity.getInt("key"));
