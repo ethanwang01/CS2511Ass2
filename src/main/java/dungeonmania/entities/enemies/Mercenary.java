@@ -31,7 +31,7 @@ public class Mercenary extends Enemy implements Interactable {
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (allied) return;
-        super.onOverlap(map, entity);
+            super.onOverlap(map, entity);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Mercenary extends Enemy implements Interactable {
         for (int i = 0; i < bribeAmount; i++) {
             player.use(Treasure.class);
         }
-
+        System.out.println("bribe");
     }
 
     @Override
@@ -63,13 +63,15 @@ public class Mercenary extends Enemy implements Interactable {
     public void move(Game game) {
         Position nextPos;
         GameMap map = game.getMap();
-        if (allied) {
-            moveRandom(game);
+        if (Position.isAdjacent(map.getPlayer().getPosition(), this.getPosition())) {
+            nextPos = map.getPlayer().getPreviousDistinctPosition();
+            nextPos = map.dijkstraPathFind(getPosition(), nextPos, this);
+            map.moveTo(this, nextPos);
         } else {
-            // Follow hostile
             nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
             map.moveTo(this, nextPos);
         }
+        
     }
 
     @Override

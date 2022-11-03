@@ -7,6 +7,7 @@ public class BattleRound {
     public BattleRound(double deltaSelfHealth, double deltaTargetHealth) {
         this.deltaSelfHealth = deltaSelfHealth;
         this.deltaTargetHealth = deltaTargetHealth;
+        System.out.println("Health: " + this.getDeltaSelfHealth());
     }
 
     public double getDeltaSelfHealth() {
