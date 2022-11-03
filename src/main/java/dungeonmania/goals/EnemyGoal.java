@@ -11,7 +11,7 @@ public class EnemyGoal extends LeafGoal {
 
     @Override
     public boolean achieved(Game game) {
-        return game.getMap().getEntities(Enemy.class).size() >= this.getTarget();
+        return game.getInitialEnemyCount() - game.getMap().getEntities(Enemy.class).size() >= this.getTarget();
     }
 
     @Override
