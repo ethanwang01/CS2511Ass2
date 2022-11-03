@@ -82,23 +82,25 @@ public abstract class MovingEntity implements Entity {
             this.previousDistinctPosition = this.previousPosition;
         }
     }
-    // use setPosition
-    @Deprecated(forRemoval = true)
-    public void translate(Direction direction) {
-        previousPosition = this.position;
-        this.position = Position.translateBy(this.position, direction);
-        if (!previousPosition.equals(this.position)) {
-            previousDistinctPosition = previousPosition;
-        }
-    }
 
-    // use setPosition
-    @Deprecated(forRemoval = true)
-    public void translate(Position offset) {
-        previousPosition = this.position;
-        this.position = Position.translateBy(this.position, offset);
-        if (!previousPosition.equals(this.position)) {
-            previousDistinctPosition = previousPosition;
-        }
-    }
+
+    // // use setPosition
+    // @Deprecated(forRemoval = true)
+    // public void translate(Direction direction) {
+    //     previousPosition = this.position;
+    //     this.position = Position.translateBy(this.position, direction);
+    //     if (!previousPosition.equals(this.position)) {
+    //         previousDistinctPosition = previousPosition;
+    //     }
+    // }
+
+    // // use setPosition
+    // @Deprecated(forRemoval = true)
+    // public void translate(Position offset) {
+    //     previousPosition = this.position;
+    //     this.position = Position.translateBy(this.position, offset);
+    //     if (!previousPosition.equals(this.position)) {
+    //         previousDistinctPosition = previousPosition;
+    //     }
+    // }
 }
