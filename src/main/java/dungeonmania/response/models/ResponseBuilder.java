@@ -25,7 +25,7 @@ public class ResponseBuilder {
                 game.getBattleFacade().getBattleResponses(),
                 (game.getPlayer() != null) ? game.getPlayer().getBuildables() : null,
                 (game.getGoals().achieved(game)) ? ""
-                        : game.getGoals().toString(game));
+                : game.getGoals().toString(game));
     }
 
     private static List<ItemResponse> getInventoryResponse(Inventory inventory) {

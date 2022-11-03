@@ -9,17 +9,17 @@ public interface Entity {
     public static final int ITEM_LAYER = 1;
     public static final int DOOR_LAYER = 2;
     public static final int CHARACTER_LAYER = 3;
-    Position getPosition();
-    Position getPreviousPosition();
-    Position getPreviousDistinctPosition();
-    boolean canMoveOnto(GameMap map, Entity entity);
-    void onOverlap(GameMap map, Entity entity);
-    void onDestroy(GameMap map);
-    void onMovedAway(GameMap map, Entity entity);
-    String getId();
-    void setPosition(Position position);
-    void setFacing(Direction facing);
-    Direction getFacing();
+    public Position getPosition();
+    public Position getPreviousPosition();
+    public Position getPreviousDistinctPosition();
+    public boolean canMoveOnto(GameMap map, Entity entity);
+    public void onOverlap(GameMap map, Entity entity);
+    public void onDestroy(GameMap map);
+    public void onMovedAway(GameMap map, Entity entity);
+    public String getId();
+    public void setPosition(Position position);
+    public void setFacing(Direction facing);
+    public Direction getFacing();
 }
 /*package dungeonmania.entities;
 
