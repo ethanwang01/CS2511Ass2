@@ -84,7 +84,10 @@ public class GameMap {
     }
 
     public void moveTo(Entity entity, Position position) {
-        if (!canMoveTo(entity, position)){ System.out.print("Cant move"); return;}
+        if (!canMoveTo(entity, position)) {
+            System.out.print("Cant move");
+            return;
+        }
 
         triggerMovingAwayEvent(entity);
         removeNode(entity);

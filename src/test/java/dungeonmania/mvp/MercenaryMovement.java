@@ -15,7 +15,7 @@ public class MercenaryMovement {
     @Test
     @Tag("1-1")
     @DisplayName("Test follows Dijkstra path when bribed")
-    public void DijkstraPathTestBribed() {
+    public void dijkstraPathTestBribed() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("mercenary_no_walls", "mercenaryDijkstraMovementTest");
         String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
@@ -25,9 +25,11 @@ public class MercenaryMovement {
         res = assertDoesNotThrow(() -> dmc.interact(mercId));
         assertEquals(0, TestUtils.getInventory(res, "treasure").size());
         res = dmc.tick(Direction.RIGHT);
-        assertTrue(new Position(3, 2).equals(getMercPos(res)) || new Position(2, 1).equals(getMercPos(res)));
+        assertTrue(new Position(3, 2).equals(getMercPos(res)) || new Position(2, 1)
+            .equals(getMercPos(res)));
         res = dmc.tick(Direction.RIGHT);
-        assertTrue(new Position(2, 2).equals(getMercPos(res)) || new Position(3, 1).equals(getMercPos(res)) || new Position(3, 3).equals(getMercPos(res)));
+        assertTrue(new Position(2, 2).equals(getMercPos(res)) || new Position(3, 1)
+            .equals(getMercPos(res)) || new Position(3, 3).equals(getMercPos(res)));
     }
 
     @Test
@@ -51,7 +53,7 @@ public class MercenaryMovement {
         assertEquals(0, TestUtils.getInventory(res, "treasure").size());
         assertEquals(new Position(3, 1), getMercPos(res));
 
-        // player walks, no battle occurs, mercenary swaps places 
+        // player walks, no battle occurs, mercenary swaps places
         res = dmc.tick(Direction.RIGHT);
         assertEquals(0, res.getBattles().size());
         assertEquals(new Position(2, 1), getMercPos(res));

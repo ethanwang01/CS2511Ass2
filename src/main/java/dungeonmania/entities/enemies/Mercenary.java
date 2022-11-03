@@ -66,7 +66,8 @@ public class Mercenary extends Enemy implements Interactable {
         // if !allied
         if (!allied) {
              // if dijkstra path is same as position player moves to, stay
-            if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this).equals(map.getPlayer().getPosition())) {
+            if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this)
+                .equals(map.getPlayer().getPosition())) {
                 System.out.println("Cannot move \n");
                 map.moveTo(this, this.getPosition());
                 return;
@@ -75,22 +76,21 @@ public class Mercenary extends Enemy implements Interactable {
                 nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
                 map.moveTo(this, nextPos);
             }
-        } 
         // if allied
-        else {
+        } else {
             // if curr position is not adjacent to player before they move
             if (!Position.isAdjacent(this.getPosition(), map.getPlayer().getPreviousPosition())) {
                 // if dijkstra path is same as position player moves to, stay
-                if (map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this).equals(map.getPlayer().getPosition())) {
+                if (map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this)
+                    .equals(map.getPlayer().getPosition())) {
                     System.out.println("Stay\n");
                     map.moveTo(this, this.getPosition());
                 } else {
                     System.out.println("dijk move ally\n");
                     map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
                 }
-            } 
             // if curr position is adjacent to player before they move, follow player's last distinct position
-            else {
+            } else {
                 System.out.println("follow player");
                 map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
             }
