@@ -22,7 +22,7 @@ public class SunstoneTest {
             dmc = new DungeonManiaController();
             DungeonResponse res = dmc.newGame(
                 "2_doors_no_keys_1_sunstone", "c_basicGoalsTest_exit");
-    
+
             res = dmc.tick(Direction.RIGHT);
             assertEquals(new Position(3, 2), TestUtils.getEntities(res, "player").get(0).getPosition());
             res = dmc.tick(Direction.DOWN);
@@ -43,7 +43,7 @@ public class SunstoneTest {
             dmc = new DungeonManiaController();
             DungeonResponse res = dmc.newGame(
                 "2_doors_no_keys_1_sunstone", "c_basicGoalsTest_exit");
-    
+
             res = dmc.tick(Direction.RIGHT);
             assertEquals(new Position(3, 2), TestUtils.getEntities(res, "player").get(0).getPosition());
             res = dmc.tick(Direction.DOWN);
@@ -57,7 +57,7 @@ public class SunstoneTest {
             res = dmc.tick(Direction.LEFT);
             assertEquals(new Position(2, 3), TestUtils.getEntities(res, "player").get(0).getPosition());
             assertEquals(1, TestUtils.getInventory(res, "sunstone").size());
-            
+
             res = dmc.tick(Direction.DOWN);
             assertEquals(new Position(2, 4), TestUtils.getEntities(res, "player").get(0).getPosition());
             // unlock door 1
