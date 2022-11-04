@@ -1,6 +1,7 @@
 package dungeonmania.goals;
 
 import dungeonmania.Game;
+import dungeonmania.entities.collectables.Sunstone;
 import dungeonmania.entities.collectables.Treasure;
 
 public class TreasureGoal extends LeafGoal {
@@ -11,7 +12,8 @@ public class TreasureGoal extends LeafGoal {
 
     @Override
     public boolean achieved(Game game) {
-        return game.getInitialTreasureCount() - game.getMap().getEntities(Treasure.class).size() >= this.getTarget();
+        return (game.getInitialTreasureCount() - game.getMap().getEntities(Treasure.class).size()
+             + game.getPlayer().getInventory().getEntities(Sunstone.class).size()) >= this.getTarget();
     }
 
     @Override
