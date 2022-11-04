@@ -1,7 +1,6 @@
 package dungeonmania.goals;
 
 import dungeonmania.Game;
-import dungeonmania.entities.enemies.Enemy;
 
 public class EnemyGoal extends LeafGoal {
 
@@ -11,7 +10,7 @@ public class EnemyGoal extends LeafGoal {
 
     @Override
     public boolean achieved(Game game) {
-        return game.getInitialEnemyCount() - game.getMap().getEntities(Enemy.class).size() >= this.getTarget();
+        return game.getKilledEnemies() >= this.getTarget();
     }
 
     @Override
