@@ -8,7 +8,7 @@ import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Mercenary extends Enemy implements Interactable {
+public class Mercenary extends MercenaryParent implements Interactable {
     public static final int DEFAULT_BRIBE_AMOUNT = 1;
     public static final int DEFAULT_BRIBE_RADIUS = 1;
     public static final double DEFAULT_ATTACK = 5.0;
@@ -19,7 +19,7 @@ public class Mercenary extends Enemy implements Interactable {
     private boolean allied = false;
 
     public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius) {
-        super(position, health, attack);
+        super(position, health, attack, bribeAmount, bribeRadius);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
     }
@@ -46,17 +46,18 @@ public class Mercenary extends Enemy implements Interactable {
     /**
      * bribe the merc
      */
-    private void bribe(Player player) {
+    private boolean bribe(Player player) {
         for (int i = 0; i < bribeAmount; i++) {
             player.use(Treasure.class);
         }
-        System.out.println("bribe");
+        return true;
     }
 
     @Override
     public void interact(Player player, Game game) {
-        allied = true;
-        bribe(player);
+        if (bribe(player)) {
+            allied = true;
+        }
     }
 
     @Override
