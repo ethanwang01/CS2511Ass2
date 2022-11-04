@@ -1,23 +1,26 @@
 package dungeonmania.entities.buildables;
 
-
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 
-public class Shield extends Buildable {
-    private int durability;
-    private double defence;
+public class Sceptre extends Buildable {
 
-    public Shield(int durability, double defence) {
+    private int durability = 1;
+    private int mindControlDuration;
+
+    public Sceptre(int mindControlDuration) {
         super(null);
-        this.durability = durability;
-        this.defence = defence;
+        this.mindControlDuration = mindControlDuration;
+    }
+
+    public int getMindControlDuration() {
+        return mindControlDuration;
     }
 
     @Override
     public void use(Game game) {
         durability--;
-        if (durability <= 0) {
+        if (durability > 0) {
             game.getPlayer().remove(this);
         }
     }
@@ -27,7 +30,7 @@ public class Shield extends Buildable {
         return BattleStatistics.applyBuff(origin, new BattleStatistics(
             0,
             0,
-            defence,
+            0,
             1,
             1));
     }

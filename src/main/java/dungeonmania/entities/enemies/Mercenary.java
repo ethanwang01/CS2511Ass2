@@ -4,6 +4,7 @@ import dungeonmania.Game;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
@@ -40,17 +41,22 @@ public class Mercenary extends Enemy implements Interactable {
      * @return
      */
     private boolean canBeBribed(Player player) {
-        return bribeRadius >= 0 && player.countEntityOfType(Treasure.class) >= bribeAmount;
+        return bribeRadius >= 0 && (player.countEntityOfType(Treasure.class) >= bribeAmount || 
+            player.countEntityOfType(Sceptre.class) > 0);
     }
 
     /**
      * bribe the merc
      */
     private void bribe(Player player) {
-        for (int i = 0; i < bribeAmount; i++) {
-            player.use(Treasure.class);
+        if (player.countEntityOfType(Treasure.class) >= bribeAmount) {
+            for (int i = 0; i < bribeAmount; i++) {
+                player.use(Treasure.class);
+            }
+        } else {
+            player.use(Sceptre.class);
         }
-        System.out.println("bribe");
+        System.out.println("bribed");
     }
 
     @Override

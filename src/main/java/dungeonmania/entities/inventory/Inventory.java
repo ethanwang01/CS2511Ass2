@@ -9,6 +9,8 @@ import dungeonmania.entities.Entity;
 import dungeonmania.entities.EntityFactory;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.buildables.Bow;
+import dungeonmania.entities.buildables.MidnightArmour;
+import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.collectables.Arrow;
 import dungeonmania.entities.collectables.Key;
 import dungeonmania.entities.collectables.Sunstone;
@@ -35,13 +37,22 @@ public class Inventory {
         int treasure = count(Treasure.class);
         int keys = count(Key.class);
         int sunstones = count(Sunstone.class);
+        int sceptres = count(Sceptre.class);
+        int midnightArmours = count(MidnightArmour.class);
+        int swords = count(Sword.class);
         List<String> result = new ArrayList<>();
 
         if (wood >= 1 && arrows >= 3) {
             result.add("bow");
         }
-        if (wood >= 2 && (treasure >= 1 || keys >= 1 || sunstones >= 1)) {
+        if (wood >= 2 && (treasure >= 1 || keys >= 1)) {
             result.add("shield");
+        }
+        if ((wood >= 1 || arrows >= 2) && (keys >= 1 || treasure >= 1) && (sunstones >= 1)) {
+            result.add("sceptre");
+        }
+        if (swords >= 1 && sunstones >= 1) {
+            result.add("midnight_armour");
         }
         return result;
     }
@@ -53,6 +64,8 @@ public class Inventory {
         List<Treasure> treasure = getEntities(Treasure.class);
         List<Key> keys = getEntities(Key.class);
         List<Sunstone> sunstones = getEntities(Sunstone.class);
+        List<Sword> swords = getEntities(Sword.class);
+
 
         if (wood.size() >= 1 && arrows.size() >= 3 && !forceShield) {
             if (remove) {
@@ -63,18 +76,41 @@ public class Inventory {
             }
             return factory.buildBow();
 
-        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1 || sunstones.size() >= 1)) {
+        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1)) {
             if (remove) {
                 items.remove(wood.get(0));
                 items.remove(wood.get(1));
                 if (treasure.size() >= 1) {
                     items.remove(treasure.get(0));
-                } else if (keys.size() >= 1) {
+                } else {
                     items.remove(keys.get(0));
                 }
             }
             return factory.buildShield();
+        } else if ((wood.size() >= 1 || arrows.size() >= 2) && (keys.size() >= 1 || treasure.size() >= 1) 
+                && (sunstones.size() >= 1)) {
+                    
+            if (remove) {
+                if (wood.size() >= 1) items.remove(wood.get(0));
+                else {
+                    items.remove(arrows.get(0));
+                    items.remove(arrows.get(1));
+                }
+
+                if (keys.size() >= 1) items.remove(keys.get(0));
+                else items.remove(treasure.get(0));
+
+                items.remove(sunstones.get(0));
+            }
+            return factory.buildSceptre();
+        }  else if (swords.size() >= 1 && sunstones.size() >= 1) {
+            if (remove) {
+                items.remove(swords.get(0));
+                items.remove(sunstones.get(0));
+            }
+            return factory.buildMidnightArmour();
         }
+
         return null;
     }
 

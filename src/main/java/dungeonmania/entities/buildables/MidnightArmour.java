@@ -1,22 +1,21 @@
 package dungeonmania.entities.buildables;
 
-
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 
-public class Shield extends Buildable {
-    private int durability;
+public class MidnightArmour extends Buildable {
+    private int durability = 1; // Durabulity will never go down
+    private double attack;
     private double defence;
 
-    public Shield(int durability, double defence) {
+    public MidnightArmour(double attack, double defence) {
         super(null);
-        this.durability = durability;
+        this.attack = defence;
         this.defence = defence;
     }
 
     @Override
     public void use(Game game) {
-        durability--;
         if (durability <= 0) {
             game.getPlayer().remove(this);
         }
@@ -26,7 +25,7 @@ public class Shield extends Buildable {
     public BattleStatistics applyBuff(BattleStatistics origin) {
         return BattleStatistics.applyBuff(origin, new BattleStatistics(
             0,
-            0,
+            attack,
             defence,
             1,
             1));
