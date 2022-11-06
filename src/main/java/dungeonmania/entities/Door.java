@@ -44,18 +44,6 @@ public class Door extends StaticEntity {
                 open();
             }
         }
-        // otherwise, check if the player has a sunstone
-        else {
-            if (hasSunstone(player)) {
-                open();
-            }
-        }
-    }
-
-    private boolean hasSunstone(Player player) {
-        Inventory inventory = player.getInventory();
-        Sunstone sunstone = inventory.getFirst(Sunstone.class);
-        return (sunstone != null);
     }
 
     private boolean hasSunstone(Player player) {

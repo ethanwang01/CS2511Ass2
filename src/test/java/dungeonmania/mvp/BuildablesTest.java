@@ -245,7 +245,7 @@ public class BuildablesTest {
         // achieve bribe
         res = assertDoesNotThrow(() -> dmc.interact(mercId));
         assertEquals(0, TestUtils.getInventory(res, "treasure").size());
-    
+
         // ensure sceptre is removed from inventory
         assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
 

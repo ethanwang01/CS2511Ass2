@@ -101,7 +101,8 @@ public class EntityFactory {
         double mercenaryAttack = config.optDouble("mercenary_attack", Mercenary.DEFAULT_ATTACK);
         int mercenaryBribeAmount = config.optInt("bribe_amount", Mercenary.DEFAULT_BRIBE_AMOUNT);
         int mercenaryBribeRadius = config.optInt("bribe_radius", Mercenary.DEFAULT_BRIBE_RADIUS);
-        int mercenaryMindControlDuration = config.optInt("mind_control_duration", MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
+        int mercenaryMindControlDuration = config.optInt("mind_control_duration",
+            MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
         return new Mercenary(pos, mercenaryHealth, mercenaryAttack, mercenaryBribeAmount, mercenaryBribeRadius,
             mercenaryMindControlDuration);
     }
@@ -112,7 +113,8 @@ public class EntityFactory {
         double assassinBribeFailRate = config.optDouble("assassin_bribe_fail_rate", Assassin.DEFAULT_BRIBE_RATE);
         double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
         int assassinBribeRadius = config.optInt("bribe_radius", Assassin.DEFAULT_BRIBE_RADIUS);
-        int assassinMindControlDuration = config.optInt("mind_control_duration", MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
+        int assassinMindControlDuration = config.optInt("mind_control_duration",
+            MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
         return new Assassin(pos, assassinHealth, assassinAttack, assassinBribeAmount, assassinBribeRadius,
             assassinBribeFailRate, assassinMindControlDuration);
     }
