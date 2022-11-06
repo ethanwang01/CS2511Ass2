@@ -45,7 +45,7 @@ public class Inventory {
         if (wood >= 1 && arrows >= 3) {
             result.add("bow");
         }
-        if (wood >= 2 && (treasure >= 1 || keys >= 1)) {
+        if (wood >= 2 && (treasure >= 1 || keys >= 1 || sunstones >= 1)) {
             result.add("shield");
         }
         if ((wood >= 1 || arrows >= 2) && (keys >= 1 || treasure >= 1) && (sunstones >= 1)) {
@@ -76,13 +76,13 @@ public class Inventory {
             }
             return factory.buildBow();
 
-        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1)) {
+        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1 || sunstones.size() >= 1)) {
             if (remove) {
                 items.remove(wood.get(0));
                 items.remove(wood.get(1));
                 if (treasure.size() >= 1) {
                     items.remove(treasure.get(0));
-                } else {
+                } else if (keys.size() >= 1) {
                     items.remove(keys.get(0));
                 }
             }

@@ -249,5 +249,17 @@ public class BuildablesTest {
         // ensure sceptre is removed from inventory
         assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
 
+        // Check Mind Control
+        // swap places with merc and no battle
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.UP);
+        assertEquals(0, res.getBattles().size());
+        // Down and mind control no effect
+        res = dmc.tick(Direction.DOWN);
+        assertEquals(0, res.getBattles().size());
+        // up and battle
+        res = dmc.tick(Direction.UP);
+        assertEquals(1, res.getBattles().size());
+
     }
 }

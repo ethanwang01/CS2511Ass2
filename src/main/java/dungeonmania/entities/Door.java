@@ -38,6 +38,11 @@ public class Door extends StaticEntity {
         if (hasKey(player)) {
             inventory.remove(key);
             open();
+            // otherwise, check if the player has a sunstone
+        } else {
+            if (hasSunstone(player)) {
+                open();
+            }
         }
         // otherwise, check if the player has a sunstone
         else {
@@ -45,6 +50,12 @@ public class Door extends StaticEntity {
                 open();
             }
         }
+    }
+
+    private boolean hasSunstone(Player player) {
+        Inventory inventory = player.getInventory();
+        Sunstone sunstone = inventory.getFirst(Sunstone.class);
+        return (sunstone != null);
     }
 
     private boolean hasSunstone(Player player) {
