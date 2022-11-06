@@ -38,12 +38,12 @@ public class Door extends StaticEntity {
         if (hasKey(player)) {
             inventory.remove(key);
             open();
-        } 
+        }
         // otherwise, check if the player has a sunstone
         else {
             if (hasSunstone(player)) {
                 open();
-            } 
+            }
         }
     }
 

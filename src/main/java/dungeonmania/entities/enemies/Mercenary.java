@@ -1,10 +1,6 @@
 package dungeonmania.entities.enemies;
 
-import dungeonmania.Game;
 import dungeonmania.entities.Entity;
-import dungeonmania.entities.Player;
-import dungeonmania.entities.buildables.Sceptre;
-import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
@@ -20,7 +16,8 @@ public class Mercenary extends MercenaryParent {
     private boolean mindContolled = false;
     private int mindControlDuration = MercenaryParent.DEFAULT_MIND_CONTROL_DURATION;
 
-    public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius, int mindControlDuration) {
+    public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius,
+        int mindControlDuration) {
         super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
@@ -67,7 +64,7 @@ public class Mercenary extends MercenaryParent {
     //     player.use(Sceptre.class);
     //     return true;
     // }
-    
+
     // @Override
     // public void interact(Player player, Game game) {
     //     if (player.countEntityOfType(Sceptre.class) >= 1) {
@@ -128,16 +125,16 @@ public class Mercenary extends MercenaryParent {
     //         // System.out.print("merc curr: " + this.getPosition() + "\n");
     //     }
 
-        
+
     //     updateMindControl();
     // }
-    
+
     // @Override
     // public void updateMindControl() {
     //     // System.out.println(this.mindControlDuration);
 
     //     if (!this.mindContolled) return;
-        
+
     //     this.mindControlDuration -= 1;
     //     if (this.mindControlDuration < 0) {
     //         this.allied = false;

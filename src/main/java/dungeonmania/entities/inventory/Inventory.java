@@ -87,9 +87,9 @@ public class Inventory {
                 }
             }
             return factory.buildShield();
-        } else if ((wood.size() >= 1 || arrows.size() >= 2) && (keys.size() >= 1 || treasure.size() >= 1) 
+        } else if ((wood.size() >= 1 || arrows.size() >= 2) && (keys.size() >= 1 || treasure.size() >= 1)
                 && (sunstones.size() >= 1)) {
-                    
+
             if (remove) {
                 if (wood.size() >= 1) items.remove(wood.get(0));
                 else {

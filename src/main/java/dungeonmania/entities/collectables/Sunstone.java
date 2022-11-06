@@ -8,5 +8,4 @@ public class Sunstone extends CollectableEntity implements InventoryItem {
         public Sunstone(Position position) {
                 super(position);
         }
-        
 }

@@ -15,14 +15,15 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     public static final double DEFAULT_ATTACK = 5.0;
     public static final double DEFAULT_HEALTH = 10.0;
     public static final int DEFAULT_MIND_CONTROL_DURATION = 10;
-    
+
     private int bribeAmount = Mercenary.DEFAULT_BRIBE_AMOUNT;
     private int bribeRadius = Mercenary.DEFAULT_BRIBE_RADIUS;
     private boolean allied = false;
     private boolean mindContolled = false;
     private int mindControlDuration = MercenaryParent.DEFAULT_MIND_CONTROL_DURATION;
 
-    public MercenaryParent(Position position, double health, double attack, int bribeAmount, int bribeRadius, int mindControlDuration) {
+    public MercenaryParent(Position position, double health, double attack, int bribeAmount,
+        int bribeRadius, int mindControlDuration) {
         super(position, health, attack);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
@@ -46,7 +47,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
      */
     protected boolean canBeBribed(Player player) {
         boolean canBribe = false;
-        if (bribeRadius >= 0 && ( player.countEntityOfType(Treasure.class) >= bribeAmount
+        if (bribeRadius >= 0 && (player.countEntityOfType(Treasure.class) >= bribeAmount
             || player.countEntityOfType(Sceptre.class) >= 1)) {
                 canBribe = true;
             }
@@ -68,7 +69,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         player.use(Sceptre.class);
         return true;
     }
-    
+
     @Override
     public void interact(Player player, Game game) {
         if (player.countEntityOfType(Sceptre.class) >= 1) {
