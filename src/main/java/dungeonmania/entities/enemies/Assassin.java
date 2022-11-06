@@ -26,16 +26,16 @@ public class Assassin extends MercenaryParent implements Interactable {
     private Random random;
 
     public Assassin(Position position, double health, double attack, int bribeAmount,
-        int bribeRadius, double bribeFailRate) {
-        super(position, health, attack, bribeAmount, bribeRadius);
+        int bribeRadius, double bribeFailRate, int mindControlDuration) {
+        super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
         random = new Random(DEFAULT_SEED);
     }
 
     public Assassin(Position position, double health, double attack, int bribeAmount, int bribeRadius,
-        double bribeFailRate, long seed) {
-        super(position, health, attack, bribeAmount, bribeRadius);
+        double bribeFailRate, long seed, int mindControlDuration) {
+        super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
         random = new Random(seed);
     }
 
