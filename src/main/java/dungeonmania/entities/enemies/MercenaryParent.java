@@ -16,8 +16,8 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     public static final double DEFAULT_HEALTH = 10.0;
     public static final int DEFAULT_MIND_CONTROL_DURATION = 10;
 
-    private int bribeAmount = Mercenary.DEFAULT_BRIBE_AMOUNT;
-    private int bribeRadius = Mercenary.DEFAULT_BRIBE_RADIUS;
+    private int bribeAmount = MercenaryParent.DEFAULT_BRIBE_AMOUNT;
+    private int bribeRadius = MercenaryParent.DEFAULT_BRIBE_RADIUS;
     private boolean allied = false;
     private boolean mindContolled = false;
     private int mindControlDuration = MercenaryParent.DEFAULT_MIND_CONTROL_DURATION;
@@ -47,7 +47,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
      */
     protected boolean canBeBribed(Player player) {
         boolean canBribe = false;
-        if (bribeRadius >= 0 && (player.countEntityOfType(Treasure.class) >= bribeAmount
+        if (this.bribeRadius >= 0 && (player.countEntityOfType(Treasure.class) >= this.bribeAmount
             || player.countEntityOfType(Sceptre.class) >= 1)) {
                 canBribe = true;
             }
@@ -58,14 +58,14 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
      * bribe the merc
      */
     private boolean bribe(Player player) {
-        for (int i = 0; i < bribeAmount; i++) {
+        for (int i = 0; i < this.bribeAmount; i++) {
             player.use(Treasure.class);
         }
         return true;
     }
 
     private boolean mindControl(Player player) {
-        mindControlDuration = player.getInventory().getEntities(Sceptre.class).get(0).getMindControlDuration();
+        // mindControlDuration = player.getInventory().getEntities(Sceptre.class).get(0).getMindControlDuration();
         player.use(Sceptre.class);
         return true;
     }
@@ -89,14 +89,14 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         // if !allied
         if (!this.allied) {
              // if dijkstra path is same as position player moves to, stay
-            if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this)
-                .equals(map.getPlayer().getPosition())) {
-                // System.out.println("Cannot move \n");
+            if (map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this)
+                .equals(map.getPlayerPosition())) {
+                System.out.println("Cannot move \n");
                 map.moveTo(this, this.getPosition());
                 return;
             } else {
-                // System.out.print("Dijk move \n");
-                nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
+                System.out.print("Dijk move \n");
+                nextPos = map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this);
                 map.moveTo(this, nextPos);
             }
         // if allied
@@ -104,30 +104,29 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
             // if curr position is not adjacent to player before they move
             if (!Position.isAdjacent(this.getPosition(), map.getPlayer().getPreviousPosition())) {
                 // if dijkstra path is same as position player moves to, stay
-                if (map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this)
-                    .equals(map.getPlayer().getPosition())) {
-                    // System.out.println("Stay\n");
+                if (map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this)
+                    .equals(map.getPlayerPosition())) {
+                    System.out.println("Stay\n");
                     map.moveTo(this, this.getPosition());
                 } else {
-                    // System.out.println("dijk move ally\n");
-                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+                    System.out.println("dijk move ally\n");
+                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this));
                 }
             // if curr position is adjacent to player before they move, follow player's last distinct position
             } else {
-                // System.out.println("follow player");
+                System.out.println("follow player");
                 map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
             }
-            // System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
-            // System.out.print("Player curr: " + map.getPlayer().getPosition() + "\n");
+            System.out.print("Player curr: " + map.getPlayerPosition() + "\n");
+            System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
+            System.out.print("merc curr:   " + this.getPosition() + "\n");
             // System.out.print("Player prevdist: " + map.getPlayer().getPreviousDistinctPosition() + "\n");
-            // System.out.print("merc curr: " + this.getPosition() + "\n");
         }
-
 
         updateMindControl();
     }
 
-    public void updateMindControl() {
+    private void updateMindControl() {
         if (!this.mindContolled) return;
 
         this.mindControlDuration -= 1;
@@ -142,6 +141,6 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
 
     @Override
     public boolean isInteractable(Player player) {
-        return !allied && canBeBribed(player);
+        return !this.allied && canBeBribed(player);
     }
 }

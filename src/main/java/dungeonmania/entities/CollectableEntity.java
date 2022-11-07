@@ -7,10 +7,6 @@ import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
 public abstract class CollectableEntity implements Entity {
-    public static final int FLOOR_LAYER = 0;
-    public static final int ITEM_LAYER = 1;
-    public static final int DOOR_LAYER = 2;
-    public static final int CHARACTER_LAYER = 3;
 
     private Position position;
     private Position previousPosition;
@@ -83,15 +79,16 @@ public abstract class CollectableEntity implements Entity {
     public void setPosition(Position position) {
         this.position = position;
     }
+
     // use setPosition
-    @Deprecated(forRemoval = true)
-    public void translate(Direction direction) {
-        previousPosition = this.position;
-        this.position = Position.translateBy(this.position, direction);
-        if (!previousPosition.equals(this.position)) {
-            previousDistinctPosition = previousPosition;
-        }
-    }
+    // @Deprecated(forRemoval = true)
+    // public void translate(Direction direction) {
+    //     previousPosition = this.position;
+    //     this.position = Position.translateBy(this.position, direction);
+    //     if (!previousPosition.equals(this.position)) {
+    //         previousDistinctPosition = previousPosition;
+    //     }
+    // }
 
     // use setPosition
     @Deprecated(forRemoval = true)

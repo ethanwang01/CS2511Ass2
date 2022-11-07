@@ -75,6 +75,10 @@ public class Player extends MovingEntity implements Battleable {
         }
     }
 
+    public <T extends InventoryItem> T getFirstitem(Class<T> itemType) {
+        return this.inventory.getFirst(itemType);
+    }
+
     @Override
     public boolean canMoveOnto(GameMap map, Entity entity) {
         return true;
@@ -101,11 +105,6 @@ public class Player extends MovingEntity implements Battleable {
         if (item != null) inventory.remove(item);
     }
 
-    public void use(Bomb bomb, GameMap map) {
-        inventory.remove(bomb);
-        bomb.onPutDown(map, getPosition());
-    }
-
     public void triggerNext(int currentTick) {
         if (queue.isEmpty()) {
             inEffective = null;
@@ -123,6 +122,11 @@ public class Player extends MovingEntity implements Battleable {
 
     public void changeState(PlayerState playerState) {
         state = playerState;
+    }
+
+    public void use(Bomb bomb, GameMap map) {
+        inventory.remove(bomb);
+        bomb.onPutDown(map, getPosition());
     }
 
     public void use(Potion potion, int tick) {
