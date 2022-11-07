@@ -23,58 +23,10 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
     }
-
-    public boolean isAllied() {
-        return allied;
-    }
-
+    
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (this.allied) return;
         super.onOverlap(map, entity);
-    }
-
-    /**
-     * check whether the current merc can be bribed
-     * @param player
-     * @return
-     */
-    private boolean canBeBribed(Player player) {
-        return bribeRadius >= 0 && player.countEntityOfType(Treasure.class) >= bribeAmount;
-    }
-
-    /**
-     * bribe the merc
-     */
-    private boolean bribe(Player player) {
-        for (int i = 0; i < bribeAmount; i++) {
-            player.use(Treasure.class);
-        }
-        return true;
-    }
-
-    @Override
-    public void interact(Player player, Game game) {
-        if (bribe(player)) {
-            allied = true;
-        }
-    }
-
-    @Override
-    public void move(Game game) {
-        Position nextPos;
-        GameMap map = game.getMap();
-        if (allied) {
-            moveRandom(game);
-        } else {
-            // Follow hostile
-            nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
-            map.moveTo(this, nextPos);
-        }
-    }
-
-    @Override
-    public boolean isInteractable(Player player) {
-        return !allied && canBeBribed(player);
     }
 }

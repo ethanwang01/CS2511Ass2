@@ -51,7 +51,8 @@ public class Spider extends Enemy {
 
     @Override
     public boolean canMoveOnto(GameMap map, Entity entity) {
-        return entity instanceof Wall || entity instanceof Player || entity instanceof SwampTile || entity instanceof Spider;
+        return entity instanceof Wall || entity instanceof Player
+        || entity instanceof SwampTile || entity instanceof Spider;
     }
 
     @Override
@@ -80,7 +81,7 @@ public class Spider extends Enemy {
                 map.moveTo(this, this.getPosition());
                 System.out.println("swamp move: ");
                 System.out.println("spider pos: " + this.getPosition());
-            } 
+            }
         }
     }
 }

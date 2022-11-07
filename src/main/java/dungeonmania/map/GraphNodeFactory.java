@@ -35,7 +35,6 @@ public class GraphNodeFactory {
             return new GraphNode(factory.createEntity(jsonEntity));
         case "swamp_tile":
             return new GraphNode(factory.createEntity(jsonEntity), jsonEntity.getInt("movement_factor"));
-        
         default:
             return null;
         }

@@ -3,7 +3,6 @@ package dungeonmania.entities.enemies;
 import dungeonmania.Game;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
-import dungeonmania.entities.Wall;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
@@ -30,7 +29,7 @@ public class Mercenary extends MercenaryParent {
 
     @Override
     public void onOverlap(GameMap map, Entity entity) {
-        if (allied) return;
+        if (isAllied()) return;
         super.onOverlap(map, entity);
     }
 
@@ -65,7 +64,7 @@ public class Mercenary extends MercenaryParent {
         Position nextPos;
         GameMap map = game.getMap();
         // if !allied
-        if (!allied) {
+        if (!isAllied()) {
              // if dijkstra path is same as position player moves to, stay
             if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this)
                 .equals(map.getPlayer().getPosition())) {
@@ -73,7 +72,7 @@ public class Mercenary extends MercenaryParent {
                 map.moveTo(this, this.getPosition());
                 return;
             } else {
-                System.out.print("Dijk move \n"); 
+                System.out.print("Dijk move \n");
                 if (this.getMoveCount() == 0) {
                     nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
                     map.moveTo(this, nextPos);
@@ -110,7 +109,6 @@ public class Mercenary extends MercenaryParent {
             System.out.print("merc curr: " + this.getPosition() + "\n");
         }
     }
-    
 
     @Override
     public boolean canMoveOnto(GameMap map, Entity entity) {
@@ -119,6 +117,6 @@ public class Mercenary extends MercenaryParent {
 
     @Override
     public boolean isInteractable(Player player) {
-        return !allied && canBeBribed(player);
+        return !isAllied() && canBeBribed(player);
     }
 }

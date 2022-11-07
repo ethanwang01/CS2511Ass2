@@ -10,26 +10,16 @@ public class SwampTile extends StaticEntity {
         this.movementFactor = movementFactor;
     }
 
-    public int getMovementFactor() {
-        return movementFactor;
-    }
-    
-    public void setMovementFactor(int movementFactor) {
-        this.movementFactor = movementFactor;
-    }
-
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (entity instanceof MovingEntity) {
-            if (((MovingEntity) entity).getMoveCount() < movementFactor) {
+            if (((MovingEntity) entity).getMoveCount() < this.movementFactor) {
                 ((MovingEntity) entity).swampMove();
                 System.out.println("movecount: " + ((MovingEntity) entity).getMoveCount());
             } else {
                 ((MovingEntity) entity).resetMoveCount();
                 System.out.println("reset movecount: " + ((MovingEntity) entity).getMoveCount());
             }
-        } else {
-            System.out.println("whoops");
         }
     }
 
