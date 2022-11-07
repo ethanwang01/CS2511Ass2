@@ -189,4 +189,77 @@ public class BuildablesTest {
         buildables.remove("shield");
         assertEquals(buildables, res.getBuildables());
     }
+
+    @Test
+    @Tag("5-6")
+    @DisplayName(
+        "Test buildable sceptre"
+    )
+    public void sceptreBuild() {
+        DungeonManiaController dmc;
+        dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame(
+            "d_buildableTest_build_sceptre", "c_BuildablesTest_DungeonResponseBuildables");
+
+        List<String> buildables = new ArrayList<>();
+        assertEquals(buildables, res.getBuildables());
+
+        // Gather entities to build sceptre
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.RIGHT);
+
+        // sceptre added to buildables list
+        buildables.add("sceptre");
+        assertEquals(buildables, res.getBuildables());
+
+        // Gather entities to build midnight armour
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.LEFT);
+        res = dmc.tick(Direction.LEFT);
+
+        // midnight armour added to buildables list
+        buildables.add("midnight_armour");
+        assertEquals(buildables.size(), res.getBuildables().size());
+        assertTrue(buildables.containsAll(res.getBuildables()));
+        assertTrue(res.getBuildables().containsAll(buildables));
+
+        // Build sceptre
+        res = assertDoesNotThrow(() -> dmc.build("sceptre"));
+        assertEquals(1, TestUtils.getInventory(res, "sceptre").size());
+
+        // sceptre disappears from buildables list
+        buildables.remove("sceptre");
+        assertEquals(buildables, res.getBuildables());
+
+        // Build midnight shield
+        res = assertDoesNotThrow(() -> dmc.build("midnight_armour"));
+        assertEquals(1, TestUtils.getInventory(res, "midnight_armour").size());
+
+        // midnight armour disappears from buildables list
+        buildables.remove("midnight_armour");
+        assertEquals(buildables, res.getBuildables());
+
+        String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
+
+        // achieve bribe
+        res = assertDoesNotThrow(() -> dmc.interact(mercId));
+        assertEquals(0, TestUtils.getInventory(res, "treasure").size());
+
+        // ensure sceptre is removed from inventory
+        assertEquals(0, TestUtils.getInventory(res, "sceptre").size());
+
+        // Check Mind Control
+        // swap places with merc and no battle
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.UP);
+        assertEquals(0, res.getBattles().size());
+        // Down and mind control no effect
+        res = dmc.tick(Direction.DOWN);
+        assertEquals(0, res.getBattles().size());
+        // up and battle
+        res = dmc.tick(Direction.UP);
+        assertEquals(1, res.getBattles().size());
+
+    }
 }
