@@ -72,7 +72,7 @@ public class Spider extends Enemy {
         if ((entities == null
                 || entities.size() == 0
                 || entities.stream().allMatch(e -> e.canMoveOnto(map, this)))) {
-            if (this.getMoveCount() == 0) {
+            if (this.getmoveCount() == 0) {
                 map.moveTo(this, nextPos);
                 System.out.println("reg move:   ");
                 System.out.println("spider pos: " + this.getPosition());

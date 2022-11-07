@@ -21,11 +21,11 @@ public class ZombieToast extends Enemy {
         return entity instanceof Wall || entity instanceof Player
         || entity instanceof SwampTile || entity instanceof ZombieToast;
     }
-    
+
     @Override
     public void move(Game game) {
         GameMap map = game.getMap();
-        if (this.getMoveCount() == 0) {
+        if (this.getmoveCount() == 0) {
             System.out.println("reg move:   ");
             System.out.println("zombie pos: " + this.getPosition());
             moveRandom(game);

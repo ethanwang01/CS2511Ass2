@@ -71,7 +71,7 @@ public class Assassin extends MercenaryParent {
                return;
            } else {
                System.out.print("Dijk move \n");
-               if (this.getMoveCount() == 0) {
+               if (this.getmoveCount() == 0) {
                    nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
                    map.moveTo(this, nextPos);
                } else {
@@ -88,7 +88,7 @@ public class Assassin extends MercenaryParent {
                    System.out.println("Stay\n");
                    map.moveTo(this, this.getPosition());
                } else {
-                   if (this.getMoveCount() == 0) {
+                   if (this.getmoveCount() == 0) {
                        System.out.println("dijk move ally\n");
                        map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
                    } else {
@@ -121,7 +121,7 @@ public class Assassin extends MercenaryParent {
     public boolean canMoveOnto(GameMap map, Entity entity) {
         return true;
     }
-    
+
     public boolean isAllied() {
         return allied;
     }

@@ -1,10 +1,7 @@
 package dungeonmania.entities.enemies;
 
-import dungeonmania.Game;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Interactable;
-import dungeonmania.entities.Player;
-import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
@@ -23,7 +20,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
     }
-    
+
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (this.allied) return;

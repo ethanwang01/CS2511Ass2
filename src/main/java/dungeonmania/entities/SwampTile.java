@@ -13,12 +13,12 @@ public class SwampTile extends StaticEntity {
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (entity instanceof MovingEntity) {
-            if (((MovingEntity) entity).getMoveCount() < this.movementFactor) {
+            if (((MovingEntity) entity).getmoveCount() < this.movementFactor) {
                 ((MovingEntity) entity).swampMove();
-                System.out.println("movecount: " + ((MovingEntity) entity).getMoveCount());
+                System.out.println("movecount: " + ((MovingEntity) entity).getmoveCount());
             } else {
-                ((MovingEntity) entity).resetMoveCount();
-                System.out.println("reset movecount: " + ((MovingEntity) entity).getMoveCount());
+                ((MovingEntity) entity).resetmoveCount();
+                System.out.println("reset movecount: " + ((MovingEntity) entity).getmoveCount());
             }
         }
     }

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import dungeonmania.DungeonManiaController;
-import dungeonmania.entities.SwampTile;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
@@ -92,7 +91,7 @@ public class SwampTest {
     @Test
     @Tag("1-4")
     @DisplayName("Test Dijkstra weighting")
-    public void TestDijkstra() {
+    public void testDijkstra() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("swampDijkstra", "mercenaryDijkstraMovementTest");
         String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
@@ -281,7 +280,7 @@ public class SwampTest {
     @Test
     @Tag("1-4")
     @DisplayName("Test Dijkstra weighting Assassin")
-    public void TestDijkstraAssassin() {
+    public void testDijkstraAssassin() {
         DungeonManiaController dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame("swampDijkstraAssassin", "mercenaryDijkstraMovementTest");
         String assId = TestUtils.getEntitiesStream(res, "assassin").findFirst().get().getId();
