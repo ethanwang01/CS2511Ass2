@@ -25,7 +25,7 @@ public class Assassin extends MercenaryParent {
     private Random random;
 
     public Assassin(Position position, double health, double attack, int bribeAmount,
-            int bribeRadius, double bribeFailRate, int mindControlDuration) {
+        int bribeRadius, double bribeFailRate, int mindControlDuration) {
         super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;

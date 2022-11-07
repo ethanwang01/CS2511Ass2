@@ -33,6 +33,7 @@ public class Mercenary extends MercenaryParent {
     // }
 
 
+
     /**
      * check whether the current merc can be bribed
      * @param player
