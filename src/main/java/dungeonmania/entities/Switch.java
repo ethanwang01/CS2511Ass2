@@ -7,7 +7,7 @@ import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Switch extends StaticEntity {
+public class Switch extends StaticEntity implements Subscribe {
     private boolean activated;
     private List<Bomb> bombs = new ArrayList<>();
 
@@ -15,8 +15,8 @@ public class Switch extends StaticEntity {
         super(position.asLayer(Entity.ITEM_LAYER));
     }
 
-    public void subscribe(Bomb b) {
-        bombs.add(b);
+    public void subscribe(Entity e) {
+        if (e instanceof Bomb) bombs.add((Bomb) e);
     }
 
     public void subscribe(Bomb bomb, GameMap map) {
@@ -26,8 +26,8 @@ public class Switch extends StaticEntity {
         }
     }
 
-    public void unsubscribe(Bomb b) {
-        bombs.remove(b);
+    public void unsubscribe(Entity e) {
+        if (e instanceof Bomb) bombs.remove((Bomb) e);
     }
 
     @Override

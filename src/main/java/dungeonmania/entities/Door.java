@@ -5,7 +5,6 @@ import dungeonmania.map.GameMap;
 import dungeonmania.entities.collectables.Key;
 import dungeonmania.entities.collectables.Sunstone;
 import dungeonmania.entities.enemies.Spider;
-import dungeonmania.entities.inventory.Inventory;
 import dungeonmania.util.Position;
 
 public class Door extends StaticEntity {
@@ -31,12 +30,11 @@ public class Door extends StaticEntity {
             return;
 
         Player player = (Player) entity;
-        Inventory inventory = player.getInventory();
-        Key key = inventory.getFirst(Key.class);
+        Key key = player.getFirstitem(Key.class);
 
         // if the player has the key, use it
         if (hasKey(player)) {
-            inventory.remove(key);
+            player.remove(key);
             open();
             // otherwise, check if the player has a sunstone
         } else {
@@ -47,16 +45,14 @@ public class Door extends StaticEntity {
     }
 
     private boolean hasSunstone(Player player) {
-        Inventory inventory = player.getInventory();
-        Sunstone sunstone = inventory.getFirst(Sunstone.class);
+        Sunstone sunstone = player.getFirstitem(Sunstone.class);
         return (sunstone != null);
     }
 
     private boolean hasKey(Player player) {
-        Inventory inventory = player.getInventory();
-        Key key = inventory.getFirst(Key.class);
+        Key key = player.getFirstitem(Key.class);
 
-        return ((key != null && key.getnumber() == number) || inventory.getFirst(Sunstone.class) != null);
+        return ((key != null && key.getnumber() == number) || player.getFirstitem(Sunstone.class) != null);
     }
 
     public boolean isOpen() {

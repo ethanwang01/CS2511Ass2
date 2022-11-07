@@ -2,6 +2,8 @@ package dungeonmania.entities;
 
 import dungeonmania.Game;
 import dungeonmania.entities.buildables.Bow;
+import dungeonmania.entities.buildables.MidnightArmour;
+import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.buildables.Shield;
 import dungeonmania.entities.collectables.*;
 import dungeonmania.entities.enemies.*;
@@ -35,7 +37,7 @@ public class EntityFactory {
         int rate = config.optInt("spider_spawn_interval", 0);
         if (rate == 0 || (tick + 1) % rate != 0) return;
         int radius = 20;
-        Position player = map.getPlayer().getPosition();
+        Position player = map.getPlayerPosition();
 
         Spider dummySpider = buildSpider(new Position(0, 0)); // for checking possible positions
 
@@ -99,7 +101,10 @@ public class EntityFactory {
         double mercenaryAttack = config.optDouble("mercenary_attack", Mercenary.DEFAULT_ATTACK);
         int mercenaryBribeAmount = config.optInt("bribe_amount", Mercenary.DEFAULT_BRIBE_AMOUNT);
         int mercenaryBribeRadius = config.optInt("bribe_radius", Mercenary.DEFAULT_BRIBE_RADIUS);
-        return new Mercenary(pos, mercenaryHealth, mercenaryAttack, mercenaryBribeAmount, mercenaryBribeRadius);
+        int mercenaryMindControlDuration = config.optInt("mind_control_duration",
+            MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
+        return new Mercenary(pos, mercenaryHealth, mercenaryAttack, mercenaryBribeAmount, mercenaryBribeRadius,
+            mercenaryMindControlDuration);
     }
 
     public Assassin buildAssassin(Position pos) {
@@ -108,8 +113,10 @@ public class EntityFactory {
         double assassinBribeFailRate = config.optDouble("assassin_bribe_fail_rate", Assassin.DEFAULT_BRIBE_RATE);
         double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
         int assassinBribeRadius = config.optInt("bribe_radius", Assassin.DEFAULT_BRIBE_RADIUS);
+        int assassinMindControlDuration = config.optInt("mind_control_duration",
+            MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
         return new Assassin(pos, assassinHealth, assassinAttack, assassinBribeAmount, assassinBribeRadius,
-            assassinBribeFailRate);
+            assassinBribeFailRate, assassinMindControlDuration);
     }
 
     public Bow buildBow() {
@@ -121,6 +128,17 @@ public class EntityFactory {
         int shieldDurability = config.optInt("shield_durability");
         double shieldDefence = config.optInt("shield_defence");
         return new Shield(shieldDurability, shieldDefence);
+    }
+
+    public Sceptre buildSceptre() {
+        int mindControlDuration = config.optInt("mind_control_duration", MercenaryParent.DEFAULT_MIND_CONTROL_DURATION);
+        return new Sceptre(mindControlDuration);
+    }
+
+    public MidnightArmour buildMidnightArmour() {
+        int attack = config.optInt("midnight_armour_attack");
+        int defence = config.optInt("midnight_armour_defence");
+        return new MidnightArmour(attack, defence);
     }
 
     private Entity constructEntity(JSONObject jsonEntity, JSONObject config) {
@@ -179,6 +197,10 @@ public class EntityFactory {
             return new Sunstone(pos);
         case "swamp_tile":
             return new SwampTile(pos, jsonEntity.getInt("movement_factor"));
+        case "sceptre":
+            return buildSceptre();
+        case "midnight_armour":
+            return buildMidnightArmour();
         default:
             return null;
         }

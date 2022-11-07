@@ -13,6 +13,8 @@ import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.potions.Potion;
 import dungeonmania.entities.enemies.Enemy;
+import dungeonmania.entities.enemies.ZombieToast;
+import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.goals.Goal;
 import dungeonmania.map.GameMap;
@@ -96,6 +98,9 @@ public class Game {
 
     public Game build(String buildable) throws InvalidActionException {
         List<String> buildables = player.getBuildables();
+        if (map.countEntities(ZombieToast.class) != 0) {
+            buildables.remove("midnight_armour");
+        }
         if (!buildables.contains(buildable)) {
             throw new InvalidActionException(String.format("%s cannot be built", buildable));
         }
@@ -158,6 +163,10 @@ public class Game {
         tickCount++;
         // update the weapons/potions duration
         return tickCount;
+    }
+
+    public void removePlayerItem(InventoryItem item) {
+        player.remove(item);
     }
 
     public int getTick() {

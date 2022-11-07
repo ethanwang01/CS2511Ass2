@@ -9,11 +9,12 @@ import java.util.stream.Collectors;
 import dungeonmania.entities.CollectableEntity;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.Subscribe;
 import dungeonmania.entities.Switch;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 
-public class Bomb extends CollectableEntity implements InventoryItem {
+public class Bomb extends CollectableEntity implements InventoryItem, Subscribe {
     public enum State {
         SPAWNED,
         INVENTORY,
@@ -32,12 +33,16 @@ public class Bomb extends CollectableEntity implements InventoryItem {
         this.radius = radius;
     }
 
-    public void subscribe(Switch s) {
-        this.subs.add(s);
+    public void subscribe(Entity e) {
+        if (e instanceof Switch) this.subs.add((Switch) e);
     }
 
     public void notify(GameMap map) {
         explode(map);
+    }
+
+    public void unsubscribe(Entity e) {
+        if (e instanceof Switch) this.subs.remove((Switch) e);
     }
 
     // @Override

@@ -56,7 +56,7 @@ public class SwampTest {
         res = dmc.tick(Direction.LEFT);
         assertTrue(new Position(0, 3).equals(getMercPos(res)));
         res = dmc.tick(Direction.LEFT);
-        assertTrue(new Position(0, 3).equals(getMercPos(res)));
+        assertEquals(new Position(0, 3), (getMercPos(res)));
         res = dmc.tick(Direction.LEFT);
         assertTrue(new Position(0, 3).equals(getMercPos(res)));
         res = dmc.tick(Direction.LEFT);
