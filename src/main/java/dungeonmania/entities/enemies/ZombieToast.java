@@ -13,7 +13,9 @@ public class ZombieToast extends Enemy {
 
     @Override
     public void move(Game game) {
-        moveRandom(game);
+        if (this.getMoveCount() == 0) {
+            moveRandom(game);
+        }
     }
 
 }

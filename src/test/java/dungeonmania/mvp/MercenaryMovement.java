@@ -123,6 +123,26 @@ public class MercenaryMovement {
         assertEquals(new Position(2, 1), getMercPos(res));
     }
 
+    @Test
+    @Tag("1-4")
+    @DisplayName("Test bribe does not affect treasure goal")
+    public void treasureGoalAfterBribe() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("mercenary_no_walls", "mercenaryDijkstraMovementTest");
+        String mercId = TestUtils.getEntitiesStream(res, "mercenary").findFirst().get().getId();
+        assertEquals(new Position(4, 1), getMercPos(res));
+        res = dmc.tick(Direction.UP);
+        assertEquals(new Position(3, 1), getMercPos(res));
+        res = assertDoesNotThrow(() -> dmc.interact(mercId));
+        assertEquals(0, TestUtils.getInventory(res, "treasure").size());
+        // assert goal not met
+        assertEquals(":treasure", TestUtils.getGoals(res));
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals(1, TestUtils.getInventory(res, "treasure").size());
+        // assert treasure goal met
+        assertEquals("", TestUtils.getGoals(res));
+    }
+
     private Position getMercPos(DungeonResponse res) {
         return TestUtils.getEntities(res, "mercenary").get(0).getPosition();
     }

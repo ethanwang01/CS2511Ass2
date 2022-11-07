@@ -13,10 +13,14 @@
             "x" : 1,
             "y" : 2
           },{
+            "type" : "treasure",
+            "x" : 2,
+            "y" : 2
+          },{
             "type": "exit",
             "x": 5,
             "y": 4
           }
         ],
-        "goal-condition": {"goal": "exit"}
+        "goal-condition": {"goal": "treasure"}
       }

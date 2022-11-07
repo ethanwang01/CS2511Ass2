@@ -60,9 +60,9 @@ public class Spider extends Enemy {
         }
         nextPos = movementTrajectory.get(nextPositionElement);
         entities = map.getEntities(nextPos);
-        if (entities == null
+        if ((entities == null
                 || entities.size() == 0
-                || entities.stream().allMatch(e -> e.canMoveOnto(map, this))) {
+                || entities.stream().allMatch(e -> e.canMoveOnto(map, this))) && this.getMoveCount() == 0) {
             map.moveTo(this, nextPos);
             updateNextPosition();
         }

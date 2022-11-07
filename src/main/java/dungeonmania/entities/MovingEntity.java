@@ -17,6 +17,7 @@ public abstract class MovingEntity implements Entity {
     private Position previousDistinctPosition;
     private Direction facing;
     private String entityId;
+    private int MoveCount = 0;
 
     public MovingEntity(Position position) {
         this.position = position;
@@ -81,6 +82,18 @@ public abstract class MovingEntity implements Entity {
         if (!previousPosition.equals(this.position)) {
             this.previousDistinctPosition = this.previousPosition;
         }
+    }
+
+    public void swampMove() {
+        this.MoveCount++;
+    }
+
+    public Integer getMoveCount() {
+        return this.MoveCount;
+    }
+
+    public void resetMoveCount() {
+        this.MoveCount = 0;
     }
 
 

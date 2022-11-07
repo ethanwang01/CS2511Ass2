@@ -2,13 +2,13 @@ package dungeonmania.entities.enemies;
 
 import dungeonmania.Game;
 import dungeonmania.entities.Entity;
-import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
+import dungeonmania.entities.Wall;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Mercenary extends MercenaryParent implements Interactable {
+public class Mercenary extends MercenaryParent {
     public static final int DEFAULT_BRIBE_AMOUNT = 1;
     public static final int DEFAULT_BRIBE_RADIUS = 1;
     public static final double DEFAULT_ATTACK = 5.0;
@@ -73,9 +73,13 @@ public class Mercenary extends MercenaryParent implements Interactable {
                 map.moveTo(this, this.getPosition());
                 return;
             } else {
-                System.out.print("Dijk move \n");
-                nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
-                map.moveTo(this, nextPos);
+                System.out.print("Dijk move \n"); 
+                if (this.getMoveCount() == 0) {
+                    nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
+                    map.moveTo(this, nextPos);
+                } else {
+                    map.moveTo(this, this.getPosition());
+                }
             }
         // if allied
         } else {
@@ -87,8 +91,13 @@ public class Mercenary extends MercenaryParent implements Interactable {
                     System.out.println("Stay\n");
                     map.moveTo(this, this.getPosition());
                 } else {
-                    System.out.println("dijk move ally\n");
-                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+                    if (this.getMoveCount() == 0) {
+                        System.out.println("dijk move ally\n");
+                        map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+                    } else {
+                        System.out.println("swamp move\n");
+                        map.moveTo(this, this.getPosition());
+                    }
                 }
             // if curr position is adjacent to player before they move, follow player's last distinct position
             } else {
@@ -100,6 +109,12 @@ public class Mercenary extends MercenaryParent implements Interactable {
             System.out.print("Player prevdist: " + map.getPlayer().getPreviousDistinctPosition() + "\n");
             System.out.print("merc curr: " + this.getPosition() + "\n");
         }
+    }
+    
+
+    @Override
+    public boolean canMoveOnto(GameMap map, Entity entity) {
+        return true;
     }
 
     @Override
