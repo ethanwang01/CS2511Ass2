@@ -133,6 +133,7 @@ public class Player extends MovingEntity implements Battleable {
         inventory.remove(potion);
         queue.add(potion);
         if (inEffective == null) {
+            inEffective = potion;
             triggerNext(tick);
         }
     }
@@ -157,25 +158,27 @@ public class Player extends MovingEntity implements Battleable {
     }
 
     public BattleStatistics applyBuff(BattleStatistics origin) {
-        if (state.isInvincible()) {
-            return BattleStatistics.applyBuff(origin, new BattleStatistics(
-                0,
-                0,
-                0,
-                1,
-                1,
-                true,
-                true));
-        } else if (state.isInvisible()) {
-            return BattleStatistics.applyBuff(origin, new BattleStatistics(
-                0,
-                0,
-                0,
-                1,
-                1,
-                false,
-                false));
-        }
-        return origin;
+        if (this.inEffective == null) return origin;
+        else return this.inEffective.applyBuff(origin);
+        // if (state.isInvincible()) {
+        //     return BattleStatistics.applyBuff(origin, new BattleStatistics(
+        //         0,
+        //         0,
+        //         0,
+        //         1,
+        //         1,
+        //         true,
+        //         true));
+        // } else if (state.isInvisible()) {
+        //     return BattleStatistics.applyBuff(origin, new BattleStatistics(
+        //         0,
+        //         0,
+        //         0,
+        //         1,
+        //         1,
+        //         false,
+        //         false));
+        // }
+        // return origin;
     }
 }
