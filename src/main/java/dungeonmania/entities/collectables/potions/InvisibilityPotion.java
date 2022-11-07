@@ -21,5 +21,4 @@ public class InvisibilityPotion extends Potion {
                 false,
                 false));
     }
-
 }

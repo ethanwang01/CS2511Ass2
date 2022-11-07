@@ -275,4 +275,8 @@ public class GameMap {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public Position getPlayerPosition() {
+        return player.getPosition();
+    }
 }

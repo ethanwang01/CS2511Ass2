@@ -33,6 +33,7 @@ public class PotionsTest {
         res = dmc.tick(TestUtils.getFirstItemId(res, "invincibility_potion"));
         assertEquals(0, TestUtils.getInventory(res, "invincibility_potion").size());
         assertEquals(0, TestUtils.getEntities(res, "invincibility_potion").size());
+    
     }
 
     @Test
@@ -84,6 +85,7 @@ public class PotionsTest {
         // we need to check that the effects exist before they are worn off,
         // otherwise teams which don't implement potions will pass
         res = dmc.tick(Direction.LEFT);
+
         assertEquals(1, TestUtils.getEntities(res, "spider").size());
         assertEquals(1, res.getBattles().size());
         assertEquals(1, res.getBattles().get(0).getRounds().size());

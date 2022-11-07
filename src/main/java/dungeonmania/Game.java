@@ -14,6 +14,7 @@ import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.potions.Potion;
 import dungeonmania.entities.enemies.Enemy;
 import dungeonmania.entities.enemies.ZombieToast;
+import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.goals.Goal;
 import dungeonmania.map.GameMap;
@@ -162,6 +163,10 @@ public class Game {
         tickCount++;
         // update the weapons/potions duration
         return tickCount;
+    }
+
+    public void removePlayerItem(InventoryItem item) {
+        player.remove(item);
     }
 
     public int getTick() {

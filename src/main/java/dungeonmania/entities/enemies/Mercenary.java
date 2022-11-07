@@ -1,7 +1,5 @@
 package dungeonmania.entities.enemies;
 
-import dungeonmania.entities.Entity;
-import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
 public class Mercenary extends MercenaryParent {
@@ -10,29 +8,30 @@ public class Mercenary extends MercenaryParent {
     public static final double DEFAULT_ATTACK = 5.0;
     public static final double DEFAULT_HEALTH = 10.0;
 
-    private int bribeAmount = Mercenary.DEFAULT_BRIBE_AMOUNT;
-    private int bribeRadius = Mercenary.DEFAULT_BRIBE_RADIUS;
-    private boolean allied = false;
-    private boolean mindContolled = false;
-    private int mindControlDuration = MercenaryParent.DEFAULT_MIND_CONTROL_DURATION;
+    // private int bribeAmount = MercenaryParent.DEFAULT_BRIBE_AMOUNT;
+    // private int bribeRadius = MercenaryParent.DEFAULT_BRIBE_RADIUS;
+    // private boolean allied = false;
+    // private boolean mindContolled = false;
+    // private int mindControlDuration = MercenaryParent.DEFAULT_MIND_CONTROL_DURATION;
 
     public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius,
         int mindControlDuration) {
         super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
-        this.bribeAmount = bribeAmount;
-        this.bribeRadius = bribeRadius;
-        this.mindControlDuration = -1;
+        // this.bribeAmount = bribeAmount;
+        // this.bribeRadius = bribeRadius;
+        // this.mindControlDuration = -1;
     }
 
-    public boolean isAllied() {
-        return allied;
-    }
+    // public boolean isAllied() {
+    //     return allied;
+    // }
 
-    @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        if (this.allied) return;
-        super.onOverlap(map, entity);
-    }
+    // @Override
+    // public void onOverlap(GameMap map, Entity entity) {
+    //     if (this.allied) return;
+    //     super.onOverlap(map, entity);
+    // }
+
 
 
     /**
@@ -91,14 +90,14 @@ public class Mercenary extends MercenaryParent {
     //     // if !allied
     //     if (!this.allied) {
     //          // if dijkstra path is same as position player moves to, stay
-    //         if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this)
-    //             .equals(map.getPlayer().getPosition())) {
+    //         if (map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this)
+    //             .equals(map.getPlayerPosition())) {
     //             // System.out.println("Cannot move \n");
     //             map.moveTo(this, this.getPosition());
     //             return;
     //         } else {
     //             // System.out.print("Dijk move \n");
-    //             nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
+    //             nextPos = map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this);
     //             map.moveTo(this, nextPos);
     //         }
     //     // if allied
@@ -106,13 +105,13 @@ public class Mercenary extends MercenaryParent {
     //         // if curr position is not adjacent to player before they move
     //         if (!Position.isAdjacent(this.getPosition(), map.getPlayer().getPreviousPosition())) {
     //             // if dijkstra path is same as position player moves to, stay
-    //             if (map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this)
-    //                 .equals(map.getPlayer().getPosition())) {
+    //             if (map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this)
+    //                 .equals(map.getPlayerPosition())) {
     //                 // System.out.println("Stay\n");
     //                 map.moveTo(this, this.getPosition());
     //             } else {
     //                 // System.out.println("dijk move ally\n");
-    //                 map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+    //                 map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this));
     //             }
     //         // if curr position is adjacent to player before they move, follow player's last distinct position
     //         } else {
@@ -120,7 +119,7 @@ public class Mercenary extends MercenaryParent {
     //             map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
     //         }
     //         // System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
-    //         // System.out.print("Player curr: " + map.getPlayer().getPosition() + "\n");
+    //         // System.out.print("Player curr: " + map.getPlayerPosition() + "\n");
     //         // System.out.print("Player prevdist: " + map.getPlayer().getPreviousDistinctPosition() + "\n");
     //         // System.out.print("merc curr: " + this.getPosition() + "\n");
     //     }

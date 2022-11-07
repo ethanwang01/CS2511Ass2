@@ -63,6 +63,7 @@ public class Portal extends StaticEntity {
                     .filter(p -> map.canMoveTo(entity, p))
                     .collect(Collectors.toList());
     }
+
     public void bind(Portal portal) {
         if (this.pair == portal)
             return;

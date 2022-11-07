@@ -32,7 +32,6 @@ public class Shield extends Buildable {
             1));
     }
 
-    @Override
     public int getDurability() {
         return durability;
     }
