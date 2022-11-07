@@ -118,29 +118,29 @@ public class SwampTest {
     @DisplayName("Test spider movement through swamp")
     public void testSpiderMpvement() {
         DungeonManiaController dmc = new DungeonManiaController();
-        DungeonResponse res = dmc.newGame("swampSpiderMovement", "simple");
+        DungeonResponse res = dmc.newGame("swampSpiderMovement", "mercenaryDijkstraMovementTest");
         assertEquals(new Position(3, 3), getSpiderPos(res));
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <= 2; i++) {
             res = dmc.tick(Direction.LEFT);
-            assertTrue(new Position(3, 2).equals(getSpiderPos(res)));
+            assertEquals(new Position(3, 2), (getSpiderPos(res)));
         }
         res = dmc.tick(Direction.LEFT);
         assertTrue(new Position(4, 2).equals(getSpiderPos(res)));
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <= 2; i++) {
             res = dmc.tick(Direction.LEFT);
-            assertTrue(new Position(4, 3).equals(getSpiderPos(res)));
+            assertEquals(new Position(4, 3), (getSpiderPos(res)));
         }
         res = dmc.tick(Direction.LEFT);
         assertEquals(new Position(4, 4), getSpiderPos(res));
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <= 2; i++) {
             res = dmc.tick(Direction.LEFT);
             assertEquals(new Position(3, 4), (getSpiderPos(res)));
         }
         res = dmc.tick(Direction.LEFT);
         assertEquals(new Position(2, 4), getSpiderPos(res));
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <= 2; i++) {
             res = dmc.tick(Direction.LEFT);
-            assertTrue(new Position(2, 3).equals(getSpiderPos(res)));
+            assertEquals(new Position(2, 3), (getSpiderPos(res)));
         }
         res = dmc.tick(Direction.LEFT);
         assertEquals(new Position(2, 2), getSpiderPos(res));
