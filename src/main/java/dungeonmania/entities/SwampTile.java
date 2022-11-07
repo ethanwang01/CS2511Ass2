@@ -28,6 +28,8 @@ public class SwampTile extends StaticEntity {
                 ((MovingEntity) entity).resetMoveCount();
                 System.out.println("reset movecount: " + ((MovingEntity) entity).getMoveCount());
             }
+        } else {
+            System.out.println("whoops");
         }
     }
 

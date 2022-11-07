@@ -5,6 +5,9 @@ import java.util.List;
 import dungeonmania.Game;
 import dungeonmania.entities.Boulder;
 import dungeonmania.entities.Entity;
+import dungeonmania.entities.Player;
+import dungeonmania.entities.SwampTile;
+import dungeonmania.entities.Wall;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
@@ -47,6 +50,11 @@ public class Spider extends Enemy {
     }
 
     @Override
+    public boolean canMoveOnto(GameMap map, Entity entity) {
+        return entity instanceof Wall || entity instanceof Player || entity instanceof SwampTile || entity instanceof Spider;
+    }
+
+    @Override
     public void move(Game game) {
         Position nextPos = movementTrajectory.get(nextPositionElement);
         GameMap map = game.getMap();
@@ -62,9 +70,17 @@ public class Spider extends Enemy {
         entities = map.getEntities(nextPos);
         if ((entities == null
                 || entities.size() == 0
-                || entities.stream().allMatch(e -> e.canMoveOnto(map, this))) && this.getMoveCount() == 0) {
-            map.moveTo(this, nextPos);
-            updateNextPosition();
+                || entities.stream().allMatch(e -> e.canMoveOnto(map, this)))) {
+            if (this.getMoveCount() == 0) {
+                map.moveTo(this, nextPos);
+                System.out.println("reg move:   ");
+                System.out.println("spider pos: " + this.getPosition());
+                updateNextPosition();
+            } else {
+                map.moveTo(this, this.getPosition());
+                System.out.println("swamp move: ");
+                System.out.println("spider pos: " + this.getPosition());
+            } 
         }
     }
 }
