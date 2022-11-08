@@ -30,16 +30,15 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         this.mindControlDuration = mindControlDuration;
     }
 
-    public boolean isAllied() {
-        return allied;
-    }
-
     @Override
     public void onOverlap(GameMap map, Entity entity) {
         if (this.allied) return;
         super.onOverlap(map, entity);
     }
 
+    public boolean isAllied() {
+        return allied;
+    }
     /**
      * check whether the current merc can be bribed
      * @param player
@@ -87,7 +86,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         GameMap map = game.getMap();
 
         // if !allied
-        if (!this.allied) {
+        if (!isAllied()) {
              // if dijkstra path is same as position player moves to, stay
             if (map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this)
                 .equals(map.getPlayerPosition())) {
@@ -96,8 +95,12 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
                 return;
             } else {
                 System.out.print("Dijk move \n");
-                nextPos = map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this);
-                map.moveTo(this, nextPos);
+                if (this.getmoveCount() == 0) {
+                    nextPos = map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this);
+                    map.moveTo(this, nextPos);
+                } else {
+                    map.moveTo(this, this.getPosition());
+                }
             }
         // if allied
         } else {
@@ -105,12 +108,17 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
             if (!Position.isAdjacent(this.getPosition(), map.getPlayer().getPreviousPosition())) {
                 // if dijkstra path is same as position player moves to, stay
                 if (map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this)
-                    .equals(map.getPlayerPosition())) {
+                    .equals(map.getPlayer().getPosition())) {
                     System.out.println("Stay\n");
                     map.moveTo(this, this.getPosition());
                 } else {
-                    System.out.println("dijk move ally\n");
-                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this));
+                    if (this.getmoveCount() == 0) {
+                        System.out.println("dijk move ally\n");
+                        map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this));
+                    } else {
+                        System.out.println("swamp move\n");
+                        map.moveTo(this, this.getPosition());
+                    }
                 }
             // if curr position is adjacent to player before they move, follow player's last distinct position
             } else {
@@ -143,4 +151,10 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     public boolean isInteractable(Player player) {
         return !this.allied && canBeBribed(player);
     }
+
+    @Override
+    public boolean canMoveOnto(GameMap map, Entity entity) {
+        return true;
+    }
+    
 }

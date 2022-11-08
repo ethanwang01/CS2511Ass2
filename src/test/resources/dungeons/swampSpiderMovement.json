@@ -1,0 +1,39 @@
+
+{
+  "entities": [
+    {
+      "type" : "player",
+      "x" : 0,
+      "y" : 3
+    },{
+      "type" : "spider",
+      "x" : 3,
+      "y" : 3
+    },{
+      "type" : "swamp_tile",
+      "x" : 2,
+      "y" : 3,
+      "movement_factor" : 2
+    },{
+      "type" : "swamp_tile",
+      "x" : 4,
+      "y" : 3,
+      "movement_factor" : 2
+    },{
+      "type" : "swamp_tile",
+      "x" : 3,
+      "y" : 2,
+      "movement_factor" : 2
+    },{
+      "type" : "swamp_tile",
+      "x" : 3,
+      "y" : 4,
+      "movement_factor" : 2
+    },{
+      "type" : "exit",
+      "x" : 10,
+      "y" : 12
+    }
+  ],
+  "goal-condition": {"goal": "exit"}
+}

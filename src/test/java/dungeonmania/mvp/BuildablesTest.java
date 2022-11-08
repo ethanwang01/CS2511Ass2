@@ -260,6 +260,5 @@ public class BuildablesTest {
         // up and battle
         res = dmc.tick(Direction.UP);
         assertEquals(1, res.getBattles().size());
-
     }
 }

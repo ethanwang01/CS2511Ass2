@@ -1,5 +1,8 @@
 package dungeonmania.entities.enemies;
 
+import dungeonmania.entities.Entity;
+import dungeonmania.entities.Player;
+import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
 public class Mercenary extends MercenaryParent {
@@ -26,13 +29,11 @@ public class Mercenary extends MercenaryParent {
     //     return allied;
     // }
 
-    // @Override
-    // public void onOverlap(GameMap map, Entity entity) {
-    //     if (this.allied) return;
-    //     super.onOverlap(map, entity);
-    // }
-
-
+    @Override
+    public void onOverlap(GameMap map, Entity entity) {
+        if (isAllied()) return;
+        super.onOverlap(map, entity);
+    }
 
     /**
      * check whether the current merc can be bribed
@@ -134,18 +135,50 @@ public class Mercenary extends MercenaryParent {
 
     //     if (!this.mindContolled) return;
 
-    //     this.mindControlDuration -= 1;
-    //     if (this.mindControlDuration < 0) {
-    //         this.allied = false;
-    //         this.mindContolled = false;
+    // @Override
+    // public void move(Game game) {
+    //     Position nextPos;
+    //     GameMap map = game.getMap();
+    //     // if !allied
+    //     if (!isAllied()) {
+    //          // if dijkstra path is same as position player moves to, stay
+    //         if (map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this)
+    //             .equals(map.getPlayer().getPosition())) {
+    //             System.out.println("Cannot move \n");
+    //             map.moveTo(this, this.getPosition());
+    //             return;
+    //         } else {
+    //             System.out.print("Dijk move \n");
+    //             nextPos = map.dijkstraPathFind(getPosition(), map.getPlayer().getPosition(), this);
+    //             map.moveTo(this, nextPos);
+    //         }
+    //     // if allied
     //     } else {
-    //         this.allied = true;
-    //         this.mindContolled = true;
+    //         // if curr position is not adjacent to player before they move
+    //         if (!Position.isAdjacent(this.getPosition(), map.getPlayer().getPreviousPosition())) {
+    //             // if dijkstra path is same as position player moves to, stay
+    //             if (map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this)
+    //                 .equals(map.getPlayer().getPosition())) {
+    //                 System.out.println("Stay\n");
+    //                 map.moveTo(this, this.getPosition());
+    //             } else {
+    //                 System.out.println("dijk move ally\n");
+    //                 map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+    //             }
+    //         // if curr position is adjacent to player before they move, follow player's last distinct position
+    //         } else {
+    //             System.out.println("follow player");
+    //             map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
+    //         }
+    //         System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
+    //         System.out.print("Player curr: " + map.getPlayer().getPosition() + "\n");
+    //         System.out.print("Player prevdist: " + map.getPlayer().getPreviousDistinctPosition() + "\n");
+    //         System.out.print("merc curr: " + this.getPosition() + "\n");
     //     }
     // }
 
-    // @Override
-    // public boolean isInteractable(Player player) {
-    //     return !this.allied && canBeBribed(player);
-    // }
+    @Override
+    public boolean isInteractable(Player player) {
+        return !isAllied() && canBeBribed(player);
+    }
 }

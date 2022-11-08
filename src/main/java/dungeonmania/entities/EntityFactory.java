@@ -195,6 +195,8 @@ public class EntityFactory {
             return new Key(pos, jsonEntity.getInt("key"));
         case "sun_stone":
             return new Sunstone(pos);
+        case "swamp_tile":
+            return new SwampTile(pos, jsonEntity.getInt("movement_factor"));
         case "sceptre":
             return buildSceptre();
         case "midnight_armour":

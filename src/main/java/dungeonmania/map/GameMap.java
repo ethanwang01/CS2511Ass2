@@ -85,7 +85,7 @@ public class GameMap {
 
     public void moveTo(Entity entity, Position position) {
         if (!canMoveTo(entity, position)) {
-            System.out.print("Cant move");
+            System.out.println("Cant move to " + position);
             return;
         }
 

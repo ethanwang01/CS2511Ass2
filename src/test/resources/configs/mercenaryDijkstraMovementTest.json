@@ -18,7 +18,7 @@
         "spider_spawn_interval": 0,
         "sword_attack": 2,
         "sword_durability": 2,
-        "treasure_goal": 1,
+        "treasure_goal": 2,
         "zombie_attack": 5,
         "zombie_health": 5,
         "zombie_spawn_interval": 0

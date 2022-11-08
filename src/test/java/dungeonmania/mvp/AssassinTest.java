@@ -168,6 +168,31 @@ public class AssassinTest {
         assertEquals(0, res.getBattles().size());
     }
 
+    @Test
+    @Tag("12-8")
+    @DisplayName("Testing an a filed bribe assassin does battle the player")
+    public void allyBattleReal() {
+        //                                  Wall    Wall    Wall
+        // P1       P2/Treasure      .      M2      M1      Wall
+        //                                  Wall    Wall    Wall
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_assassinTest_allyBattle", "c_assassinTest_allyFight");
+
+        String mercId = TestUtils.getEntitiesStream(res, "assassin").findFirst().get().getId();
+
+        // pick up treasure
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals(1, TestUtils.getInventory(res, "treasure").size());
+
+        // achieve failed bribe
+        res = assertDoesNotThrow(() -> dmc.interact(mercId));
+        assertEquals(0, TestUtils.getInventory(res, "treasure").size());
+
+        // walk into mercenary, a battle does occur
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals(0, res.getBattles().size());
+    }
+
     private Position getAssassinPos(DungeonResponse res) {
         return TestUtils.getEntities(res, "assassin").get(0).getPosition();
     }

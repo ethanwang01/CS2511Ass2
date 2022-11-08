@@ -33,6 +33,8 @@ public class GraphNodeFactory {
         case "key":
         case "sun_stone":
             return new GraphNode(factory.createEntity(jsonEntity));
+        case "swamp_tile":
+            return new GraphNode(factory.createEntity(jsonEntity), jsonEntity.getInt("movement_factor"));
         default:
             return null;
         }
