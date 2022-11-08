@@ -53,9 +53,9 @@ public class Assassin extends MercenaryParent {
      * @param player
      * @return
      */
-    protected boolean canBeBribed(Player player) {
-        return bribeRadius >= 0 && player.countEntityOfType(Treasure.class) >= bribeAmount;
-    }
+    // protected boolean canBeBribed(Player player) {
+    //     return bribeRadius >= 0 && player.countEntityOfType(Treasure.class) >= bribeAmount;
+    // }
 
     // @Override
     // public void move(Game game) {
@@ -108,32 +108,32 @@ public class Assassin extends MercenaryParent {
     //    }
     // }
 
-    @Override
-    public void interact(Player player, Game game) {
-        System.out.println(allied);
-        if (bribe(player)) {
-            allied = true;
-        }
-        System.out.println(allied);
-    }
+    // @Override
+    // public void interact(Player player, Game game) {
+    //     System.out.println(allied);
+    //     if (bribe(player)) {
+    //         allied = true;
+    //     }
+    //     System.out.println(allied);
+    // }
 
-    @Override
-    public boolean canMoveOnto(GameMap map, Entity entity) {
-        return true;
-    }
+    // @Override
+    // public boolean canMoveOnto(GameMap map, Entity entity) {
+    //     return true;
+    // }
 
-    public boolean isAllied() {
-        return allied;
-    }
+    // public boolean isAllied() {
+    //     return allied;
+    // }
 
-    @Override
-    public void onOverlap(GameMap map, Entity entity) {
-        if (isAllied()) return;
-        super.onOverlap(map, entity);
-    }
+    // @Override
+    // public void onOverlap(GameMap map, Entity entity) {
+    //     if (isAllied()) return;
+    //     super.onOverlap(map, entity);
+    // }
 
-    @Override
-    public boolean isInteractable(Player player) {
-        return !allied && canBeBribed(player);
-    }
+    // @Override
+    // public boolean isInteractable(Player player) {
+    //     return !allied && canBeBribed(player);
+    // }
 }
