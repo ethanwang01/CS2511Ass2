@@ -86,7 +86,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
         GameMap map = game.getMap();
 
         // if !allied
-        if (!this.allied) {
+        if (!isAllied()) {
              // if dijkstra path is same as position player moves to, stay
             if (map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this)
                 .equals(map.getPlayerPosition())) {
@@ -151,4 +151,10 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     public boolean isInteractable(Player player) {
         return !this.allied && canBeBribed(player);
     }
+
+    @Override
+    public boolean canMoveOnto(GameMap map, Entity entity) {
+        return true;
+    }
+    
 }
