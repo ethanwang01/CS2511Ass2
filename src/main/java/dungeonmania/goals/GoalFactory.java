@@ -1,9 +1,11 @@
 package dungeonmania.goals;
 
+import java.io.Serializable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class GoalFactory {
+public class GoalFactory implements Serializable {
     public static Goal createGoal(JSONObject jsonGoal, JSONObject config) {
         JSONArray subgoals;
         switch (jsonGoal.getString("goal")) {

@@ -1,5 +1,6 @@
 package dungeonmania.map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
 
-public class GameMap {
+public class GameMap implements Serializable {
     private Game game;
     private Map<Position, GraphNode> nodes = new HashMap<>();
     private Player player;

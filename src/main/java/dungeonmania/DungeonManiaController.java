@@ -1,10 +1,32 @@
 package dungeonmania;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import dungeonmania.entities.CollectableEntity;
+import dungeonmania.entities.Entity;
+import dungeonmania.entities.MovingEntity;
+import dungeonmania.entities.Player;
+import dungeonmania.entities.StaticEntity;
+import dungeonmania.entities.collectables.potions.InvincibilityPotion;
+import dungeonmania.entities.collectables.potions.InvisibilityPotion;
+import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.response.models.ResponseBuilder;
@@ -12,7 +34,10 @@ import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
 
 public class DungeonManiaController {
+    private ArrayList<Game> games = new ArrayList<Game>();
     private Game game = null;
+    private DungeonResponse lastTickResponse;
+    private int gameCount = 0;
 
     public String getSkin() {
         return "default";
@@ -101,14 +126,82 @@ public class DungeonManiaController {
      * /game/save
      */
     public DungeonResponse saveGame(String name) throws IllegalArgumentException {
-        return null;
+        String filename = "src/main/java/dungeonmania/SaveFiles/" + name + ".txt";
+        try {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(game);
+            out.flush();
+            out.close();
+            System.out.println("Successfully Saved game");
+        } catch (IOException x) {
+            System.out.println("Failed to Save Game");
+        }
+        return ResponseBuilder.getDungeonResponse(game);
+
+
+        // String fileName = "src/main/java/dungeonmania/datastore.json";
+        // Gson gson = new Gson();
+        // String jsonStr = gson.toJson(lastTickResponse);
+        // JsonObject jsonObj = gson.fromJson(jsonStr, JsonElement.class).getAsJsonObject();
+        
+        // // jsonObj.addProperty("save_name", name);
+        // // jsonObj.addProperty("numEntities", game.getMap().getEntities().size());
+        // // jsonObj.addProperty("whichTick", game.getTick());
+        // // jsonObj.addProperty("inventoryInvisibilityPotion", game.getPlayer().getInventory().getEntities(InvisibilityPotion.class).size());
+        // // jsonObj.addProperty("mapInvisibilityPotion", game.getMap().getEntities(InvisibilityPotion.class).size());
+        // // jsonObj.addProperty("inventoryInvincibilityPotion", game.getPlayer().getInventory().getEntities(InvincibilityPotion.class).size());
+        // // jsonObj.addProperty("mapInvincibilityPotion", game.getMap().getEntities(InvincibilityPotion.class).size());
+        
+        // JsonArray jsonEntities = jsonObj.get("entities").getAsJsonArray();
+        // JsonArray jsonInventory = jsonObj.get("inventory").getAsJsonArray();
+
+        // List<MovingEntity> movingEntitiesList = new ArrayList<MovingEntity>();
+        // List<StaticEntity> staticEntitiesList = new ArrayList<StaticEntity>();
+        // List<CollectableEntity> collectableEntitiesList = new ArrayList<CollectableEntity>();
+        
+        // for (Entity ent : game.getMap().getEntities()) {
+        //     if (ent instanceof MovingEntity) {
+        //         movingEntitiesList.add((MovingEntity) ent);
+        //     } else if (ent instanceof StaticEntity) {
+        //         staticEntitiesList.add((StaticEntity) ent);
+        //     } else if (ent instanceof CollectableEntity) {
+        //         collectableEntitiesList.add((CollectableEntity) ent);
+        //     }
+        // }
+
+        // for (int i = 0; i < jsonEntities.size(); i++) {
+        //     JsonObject jsonEnt = jsonEntities.get(i).getAsJsonObject();
+        //     if (jsonEnt.get("type").equals("player")) {
+        //         for (MovingEntity ent : movingEntitiesList) {
+        //             if (ent instanceof Player) {
+        //                 jsonEnt.addProperty("battleStatistics", (((Player) ent).getBattleStatistics());
+        //             }
+        //         }
+        //     }
+        // }
+        
+
+        // for (InventoryItem ent : game.getPlayer().getInventory().getItems()) {
+
+        // }
     }
 
     /**
      * /game/load
      */
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
-        return null;
+        try {
+            FileInputStream file = new FileInputStream(name + ".txt");
+            ObjectInputStream in = new ObjectInputStream(file);
+            game = (Game) in.readObject();
+            in.close();
+            file.close();
+            System.out.println("Loaded game");
+        } catch (Exception x) {
+            System.out.println("Failed to load game");
+        }
+        return ResponseBuilder.getDungeonResponse(game);
     }
 
     /**

@@ -1,8 +1,10 @@
 package dungeonmania.goals;
 
+import java.io.Serializable;
+
 import dungeonmania.Game;
 
-public class LeafGoal implements Goal {
+public class LeafGoal implements Goal, Serializable {
     private String type;
     private Integer target;
 

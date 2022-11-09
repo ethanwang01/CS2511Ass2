@@ -1,9 +1,10 @@
 package dungeonmania.response.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DungeonResponse {
+public final class DungeonResponse implements Serializable {
     private final String dungeonId;
     private final String dungeonName;
     private final List<EntityResponse> entities;

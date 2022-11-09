@@ -1,12 +1,13 @@
 package dungeonmania.map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import dungeonmania.entities.Entity;
 import dungeonmania.util.Position;
 
-public class GraphNode {
+public class GraphNode implements Serializable {
     private Position position;
     private List<Entity> entities = new ArrayList<>();
 

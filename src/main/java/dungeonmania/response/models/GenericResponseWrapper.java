@@ -1,6 +1,8 @@
 package dungeonmania.response.models;
 
-public final class GenericResponseWrapper<T> {
+import java.io.Serializable;
+
+public final class GenericResponseWrapper<T> implements Serializable {
     private final T result;
     private final String errorTitle;
     private final String errorMessage;

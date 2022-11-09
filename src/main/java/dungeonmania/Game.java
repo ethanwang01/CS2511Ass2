@@ -1,5 +1,6 @@
 package dungeonmania;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.UUID;
@@ -20,7 +21,7 @@ import dungeonmania.goals.Goal;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Direction;
 
-public class Game {
+public class Game implements Serializable {
     private String id;
     private String name;
     private Goal goals;

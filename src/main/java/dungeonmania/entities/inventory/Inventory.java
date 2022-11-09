@@ -1,5 +1,6 @@
 package dungeonmania.entities.inventory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.Wood;
 
-public class Inventory {
+public class Inventory implements Serializable{
     private List<InventoryItem> items = new ArrayList<>();
 
     public boolean add(InventoryItem item) {
@@ -152,4 +153,7 @@ public class Inventory {
         return weapon;
     }
 
+    public List<InventoryItem> getItems() {
+        return items;
+    }
 }
