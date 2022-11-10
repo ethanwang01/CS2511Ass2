@@ -87,8 +87,8 @@ public class Assassin extends MercenaryParent {
     //            } else {
     //                if (this.getmoveCount() == 0) {
     //                    System.out.println("dijk move ally\n");
-    //                    map.moveTo(this, map.dijkstraPathFind(
-    //                    this.getPosition(), map.getPlayer().getPosition(), this));
+    //                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(),
+                            // map.getPlayer().getPosition(), this));
     //                } else {
     //                    System.out.println("swamp move\n");
     //                    map.moveTo(this, this.getPosition());
