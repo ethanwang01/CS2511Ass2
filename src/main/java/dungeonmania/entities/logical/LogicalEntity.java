@@ -46,7 +46,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
     }
 
     public void activate() {
-        if (getLogic().equals("AND")) {
+        if (getLogic().equals("and")) {
             if (adjConductors.size() < 2) return;
             int count = 0;
             for (Conductor c : adjConductors) {
@@ -56,7 +56,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
             }
             if (adjConductors.size() == count) this.activated = true;
         }
-        if (getLogic().equals("OR")) {
+        if (getLogic().equals("or")) {
             int count = 0;
             for (Conductor c : adjConductors) {
                 if (c.isActivated()) {
@@ -65,7 +65,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
             }
             if (count > 0) this.activated = true;
         }
-        if (getLogic().equals("XOR")) {
+        if (getLogic().equals("xor")) {
             int count = 0;
             for (Conductor c : adjConductors) {
                 if (c.isActivated()) {
@@ -75,7 +75,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
             if (count == 1) this.activated = true;
             else this.activated = false;
         }
-        if (getLogic().equals("CO_AND")) {
+        if (getLogic().equals("co_and")) {
             if (adjConductors.size() < 2) return;
             int count = 0;
             double key = adjConductors.get(1).getActivationKey();
@@ -96,7 +96,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
     }
 
     public void deactivate() {
-        if (getLogic().equals("AND")) {
+        if (getLogic().equals("and")) {
             if (adjConductors.size() < 2) {
                 System.out.println("adj < 2");
                 return;
@@ -112,7 +112,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
                 System.out.println("activated still");
             } else this.activated = false;
         }
-        if (getLogic().equals("OR")) {
+        if (getLogic().equals("or")) {
             int count = 0;
             for (Conductor c : adjConductors) {
                 if (c.isActivated()) {
@@ -123,7 +123,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
                 this.activated = true;
             } else this.activated = false;
         }
-        if (getLogic().equals("XOR")) {
+        if (getLogic().equals("xor")) {
             int count = 0;
             for (Conductor c : adjConductors) {
                 if (c.isActivated()) {
@@ -136,7 +136,7 @@ public abstract class LogicalEntity extends StaticEntity implements Subscribe {
                 this.activated = false;
             }
         }
-        if (getLogic().equals("CO_AND")) {
+        if (getLogic().equals("co_and")) {
             if (adjConductors.size() < 2) return;
             int count = 0;
             double key = adjConductors.get(1).getActivationKey();

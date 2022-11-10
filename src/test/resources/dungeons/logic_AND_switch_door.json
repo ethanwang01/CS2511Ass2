@@ -20,7 +20,7 @@
         "type" : "switch_door",
         "x" : 4,
         "y" : 0,
-        "logic" : "AND"
+        "logic" : "and"
     }, {
         "type" : "switch",
         "x" : 0,
