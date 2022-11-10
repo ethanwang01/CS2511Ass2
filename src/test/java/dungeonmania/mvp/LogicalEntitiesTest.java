@@ -256,11 +256,11 @@ public class LogicalEntitiesTest {
         res = dmc.tick(Direction.RIGHT);
         // assert "reactivating" conductor from another switch doesn't affect the light_bulb
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(4, 0)));
-    } 
+    }
     @Test
     @Tag("20-9")
     @DisplayName("Mixed Logic Entities Test")
-    public void logic_mixed() {
+    public void logicMixed() {
         DungeonManiaController dmc;
         dmc = new DungeonManiaController();
         DungeonResponse res = dmc.newGame(
@@ -279,7 +279,7 @@ public class LogicalEntitiesTest {
         res = dmc.tick(Direction.DOWN);
         res = dmc.tick(Direction.DOWN);
         res = dmc.tick(Direction.LEFT);
-        // activate second switch, expect or and and lightbulbs to turn on, expect co_and lightbulb to stay on, expect 
+        // activate second switch, expect or and and lightbulbs to turn on, expect co_and lightbulb to stay on, expect
         // xor lightbulb to turn off
         res = dmc.tick(Direction.DOWN);
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(6, 0)));
@@ -293,5 +293,5 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(6, 7)));
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(2, 4)));
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(1, 7)));
-    } 
+    }
 }
