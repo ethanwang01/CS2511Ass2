@@ -33,7 +33,6 @@ public class PotionsTest {
         res = dmc.tick(TestUtils.getFirstItemId(res, "invincibility_potion"));
         assertEquals(0, TestUtils.getInventory(res, "invincibility_potion").size());
         assertEquals(0, TestUtils.getEntities(res, "invincibility_potion").size());
-    
     }
 
     @Test
