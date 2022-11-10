@@ -156,5 +156,5 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     public boolean canMoveOnto(GameMap map, Entity entity) {
         return true;
     }
-    
+
 }
