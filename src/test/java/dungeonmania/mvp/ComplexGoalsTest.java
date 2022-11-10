@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ComplexGoalsTest {
 
     @Test
-    @Tag("14-1")
+    @Tag("19-1")
     @DisplayName("Testing a map with 4 conjunction goal")
     public void andAll() {
         DungeonManiaController dmc;
@@ -47,7 +47,7 @@ public class ComplexGoalsTest {
     }
 
     @Test
-    @Tag("14-2")
+    @Tag("19-2")
     @DisplayName("Testing a map with 4 disjunction goal")
     public void orAll() {
         DungeonManiaController dmc;
@@ -66,7 +66,7 @@ public class ComplexGoalsTest {
     }
 
     @Test
-    @Tag("14-3")
+    @Tag("19-3")
     @DisplayName("Testing that the exit goal must be achieved last in EXIT and TREASURE")
     public void exitAndTreasureOrder() {
         DungeonManiaController dmc;
@@ -98,7 +98,7 @@ public class ComplexGoalsTest {
     }
 
     @Test
-    @Tag("14-4")
+    @Tag("19-4")
     @DisplayName("Testing that the exit goal must be achieved last and EXIT and TREASURE")
     public void exitAndBouldersAndTreasureOrder() {
         DungeonManiaController dmc;
@@ -140,7 +140,7 @@ public class ComplexGoalsTest {
     }
 
     @Test
-    @Tag("14-6")
+    @Tag("19-6")
     @DisplayName("Testing a switch goal can be achieved and then become unachieved")
     public void switchUnachieved() {
         DungeonManiaController dmc;

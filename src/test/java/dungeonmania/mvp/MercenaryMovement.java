@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MercenaryMovement {
 
     @Test
-    @Tag("1-1")
+    @Tag("15-1")
     @DisplayName("Test follows Dijkstra path when bribed")
     public void dijkstraPathTestBribed() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -33,7 +33,7 @@ public class MercenaryMovement {
     }
 
     @Test
-    @Tag("1-2")
+    @Tag("15-2")
     @DisplayName("Testing an allied mercenary swaps positions")
     public void swaps() {
         //                                  Wall    Wall    Wall
@@ -60,7 +60,7 @@ public class MercenaryMovement {
     }
 
     @Test
-    @Tag("1-3")
+    @Tag("15-3")
     @DisplayName("Testing an allied mercenary stays when dijkstra path move is to player's position after moves")
     public void mercenaryStays() {
         //                                  Wall    Wall    Wall
@@ -87,7 +87,7 @@ public class MercenaryMovement {
     }
 
     @Test
-    @Tag("1-3")
+    @Tag("15-3")
     @DisplayName("Testing an allied mercenary follows based on player's previous distinct position")
     public void mercenaryFollows() {
         //                                  Wall    Wall    Wall
@@ -124,7 +124,7 @@ public class MercenaryMovement {
     }
 
     @Test
-    @Tag("1-4")
+    @Tag("15-4")
     @DisplayName("Test bribe does not affect treasure goal")
     public void treasureGoalAfterBribe() {
         DungeonManiaController dmc = new DungeonManiaController();

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AssassinTest {
 
     @Test
-    @Tag("12-1")
+    @Tag("18-1")
     @DisplayName("Test Assassin in line with Player moves towards them")
     public void simpleMovement() {
         //                                  Wall    Wall   Wall    Wall    Wall    Wall
@@ -33,7 +33,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-2")
+    @Tag("18-2")
     @DisplayName("Test Assassin stops if they cannot move any closer to the player")
     public void stopMovement() {
         //                  Wall     Wall    Wall
@@ -48,7 +48,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-3")
+    @Tag("18-3")
     @DisplayName("Test assassin can not move through closed doors")
     public void doorMovement() {
         //                  Wall     Door    Wall
@@ -63,7 +63,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-4")
+    @Tag("18-4")
     @DisplayName("Test assassin moves around a wall to get to the player")
     public void evadeWall() {
         //                  Wall      M2
@@ -78,7 +78,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-5")
+    @Tag("18-5")
     @DisplayName("Testing a assassin can be bribed with a certain amount")
     public void bribeAmount() {
         //                                                          Wall     Wall     Wall    Wall    Wall
@@ -122,7 +122,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-6")
+    @Tag("18-6")
     @DisplayName("Testing a assassin can be bribed within a radius")
     public void bribeRadius() {
         //                                         Wall     Wall    Wall    Wall  Wall
@@ -144,7 +144,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-7")
+    @Tag("18-7")
     @DisplayName("Testing an allied assassin does not battle the player")
     public void allyBattle() {
         //                                  Wall    Wall    Wall
@@ -169,7 +169,7 @@ public class AssassinTest {
     }
 
     @Test
-    @Tag("12-8")
+    @Tag("18-8")
     @DisplayName("Testing an a filed bribe assassin does battle the player")
     public void allyBattleReal() {
         //                                  Wall    Wall    Wall

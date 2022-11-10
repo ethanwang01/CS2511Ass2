@@ -191,7 +191,7 @@ public class BuildablesTest {
     }
 
     @Test
-    @Tag("5-6")
+    @Tag("5-7")
     @DisplayName(
         "Test buildable sceptre"
     )

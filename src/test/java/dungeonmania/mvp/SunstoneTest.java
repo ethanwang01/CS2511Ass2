@@ -15,7 +15,7 @@ import dungeonmania.util.Position;
 
 public class SunstoneTest {
         @Test
-        @Tag("1-1")
+        @Tag("16-1")
         @DisplayName("Test player cannot walk through a closed door without key/sunstone")
         public void closedDoorNoKeys() {
             DungeonManiaController dmc;
@@ -36,7 +36,7 @@ public class SunstoneTest {
         }
 
         @Test
-        @Tag("1-2")
+        @Tag("16-2")
         @DisplayName("Test player cannot walk through a closed door, but can use sunstone to unlock")
         public void closedDoorSunstone() {
             DungeonManiaController dmc;
@@ -77,7 +77,7 @@ public class SunstoneTest {
             assertEquals("", TestUtils.getGoals(res));
         }
         @Test
-        @Tag("1-3")
+        @Tag("16-3")
         @DisplayName("Test player cannot walk through a closed door without key/sunstone")
         public void treasureSunstone() {
             DungeonManiaController dmc;
@@ -102,7 +102,7 @@ public class SunstoneTest {
             assertEquals("", TestUtils.getGoals(res));
         }
         @Test
-        @Tag("1-4")
+        @Tag("16-4")
         @DisplayName("Test player can build shield without key but with sunstone")
         public void shieldSunstone() {
             DungeonManiaController dmc;
@@ -129,7 +129,7 @@ public class SunstoneTest {
             assertEquals(1, TestUtils.getInventory(res, "sunstone").size());
         }
         @Test
-        @Tag("1-5")
+        @Tag("16-5")
         @DisplayName("Test player can build shield without key but with sunstone, can use sunstone to open door")
         public void shieldSunstoneDoor() {
             DungeonManiaController dmc;
