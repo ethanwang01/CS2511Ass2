@@ -206,4 +206,12 @@ public class EntityFactory implements Serializable{
             return null;
         }
     }
+
+    public Random getRandom() {
+        return ranGen;
+    }
+
+    public void setRandom(Random r) {
+        this.ranGen = r;
+    }
 }

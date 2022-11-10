@@ -10,7 +10,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +22,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import dungeonmania.battles.BattleFacade;
 import dungeonmania.entities.CollectableEntity;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.MovingEntity;
@@ -28,16 +32,17 @@ import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.exceptions.InvalidActionException;
+import dungeonmania.goals.Goal;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.response.models.ResponseBuilder;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
 
 public class DungeonManiaController {
-    private ArrayList<Game> games = new ArrayList<Game>();
+    private ArrayList<String> savedGames = new ArrayList<String>();
     private Game game = null;
-    private DungeonResponse lastTickResponse;
-    private int gameCount = 0;
+    // private DungeonResponse lastTickResponse;
+    // private int gameCount = 0;
 
     public String getSkin() {
         return "default";
@@ -126,15 +131,40 @@ public class DungeonManiaController {
      * /game/save
      */
     public DungeonResponse saveGame(String name) throws IllegalArgumentException {
-        String filename = "src/main/java/dungeonmania/SaveFiles/" + name + ".txt";
+        String filename = "src/main/java/dungeonmania/SaveFiles/" + name + ".ser";
         try {
+            
+            // JSONArray entities = new JSONArray();
+            // // Save entities
+            // List <Entity> gameEntities = game.getGameEntites();
+            // for (Entity e : gameEntities) {
+            //     entities.put(e.toJSON());
+            // }
+            
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(game);
+            out.writeObject(game.getId());
+            out.writeObject(game.getName());
+            out.writeObject(game.getGoals());
+            out.writeObject(game.getMap().getNodes());
+            out.writeObject(game.getPlayer());
+            out.writeObject(game.getBattleFacade());
+            out.writeObject(game.getInitialTreasureCount());
+            out.writeObject(game.getKilledEnemies());
+            out.writeObject(game.getEntityFactory().getRandom());
+            out.writeObject(game.isInTick());
+            out.writeObject(game.getTickCount());
+            // System.out.println("HERE");
+            // out.writeObject(game.getSub().toArray());
+            // System.out.println("HEREc");
+            // out.writeObject(game.getAddingSub().toArray());
+            // System.out.println("HEREcc");
             out.flush();
             out.close();
-            System.out.println("Successfully Saved game");
-        } catch (IOException x) {
+            this.savedGames.add(filename);
+            System.out.println("Successfully Saved game to: " + filename);
+        } catch (Exception x) {
+            System.out.println(x);
             System.out.println("Failed to Save Game");
         }
         return ResponseBuilder.getDungeonResponse(game);
@@ -192,9 +222,26 @@ public class DungeonManiaController {
      */
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
-            FileInputStream file = new FileInputStream(name + ".txt");
+            System.out.println("DEBUG HERE");
+            FileInputStream file = new FileInputStream(name);
+            System.out.println("DEBUG HERE");
             ObjectInputStream in = new ObjectInputStream(file);
-            game = (Game) in.readObject();
+            System.out.println("DEBUG HERE");
+            game.setId((String) in.readObject());
+            System.out.println("DEBUG HERE");
+            game.setName((String) in.readObject());
+            game.setGoals((Goal) in.readObject());
+            Object mapNodes = in.readObject();
+
+            game.setPlayer((Player) in.readObject());
+            game.setBattleFacade((BattleFacade) in.readObject());
+            game.setInitialTreasureCount((int) in.readObject());
+            game.setKilledEnemies((int) in.readObject());
+            game.getEntityFactory().setRandom((Random) in.readObject());
+
+            game.setIsInTick(((boolean) in.readObject()));
+            game.setTickCount((int) in.readObject());
+
             in.close();
             file.close();
             System.out.println("Loaded game");
@@ -208,7 +255,7 @@ public class DungeonManiaController {
      * /games/all
      */
     public List<String> allGames() {
-        return new ArrayList<>();
+        return savedGames;
     }
 
     /**

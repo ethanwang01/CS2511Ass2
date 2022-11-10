@@ -280,4 +280,12 @@ public class GameMap implements Serializable {
     public Position getPlayerPosition() {
         return player.getPosition();
     }
+
+    public Map<Position, GraphNode> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(Map<Position, GraphNode> nodes) {
+        this.nodes = nodes;
+    }
 }
