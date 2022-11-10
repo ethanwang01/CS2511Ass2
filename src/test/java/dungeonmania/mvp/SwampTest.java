@@ -15,7 +15,7 @@ import dungeonmania.util.Position;
 
 public class SwampTest {
     @Test
-    @Tag("1-1")
+    @Tag("17-1")
     @DisplayName("Test Swamp movement of non-adj unallied mercenary")
     public void testMercenarySwampMovementUnalliedNonAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -38,7 +38,7 @@ public class SwampTest {
         assertTrue(new Position(-1, 3).equals(getMercPos(res)));
     }
     @Test
-    @Tag("1-2")
+    @Tag("17-2")
     @DisplayName("Test Swamp movement of non-adj allied mercenary")
     public void testMercenarySwampMovementAlliedNonAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -63,7 +63,7 @@ public class SwampTest {
         assertTrue(new Position(-1, 3).equals(getMercPos(res)));
     }
     @Test
-    @Tag("1-3")
+    @Tag("17-3")
     @DisplayName("Test Swamp movement of adj allied mercenary")
     public void testMercenarySwampMovementAlliedAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -89,7 +89,7 @@ public class SwampTest {
         assertTrue(new Position(-3, 3).equals(getMercPos(res)));
     }
     @Test
-    @Tag("1-4")
+    @Tag("17-4")
     @DisplayName("Test Dijkstra weighting")
     public void testDijkstra() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -112,7 +112,7 @@ public class SwampTest {
         assertTrue(new Position(0, 5).equals(getMercPos(res)) || new Position(0, 1).equals(getMercPos(res)));
     }
     @Test
-    @Tag("1-5")
+    @Tag("17-5")
     @DisplayName("Test spider movement through swamp")
     public void testSpiderMovement() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -144,7 +144,7 @@ public class SwampTest {
         assertEquals(new Position(2, 2), getSpiderPos(res));
     }
     @Test
-    @Tag("1-5")
+    @Tag("17-5")
     @DisplayName("Test zombie movement through swamp")
     public void testZombieSwampMovement() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -158,7 +158,7 @@ public class SwampTest {
         assertTrue(new Position(1, 3).equals(getZombiePos(res)) || new Position(3, 3).equals(getZombiePos(res)));
     }
     @Test
-    @Tag("1-6")
+    @Tag("17-6")
     @DisplayName("Test Swamp movement of unallied assassin through swamp")
     public void testAssassinSwampMovementUnallied() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -181,7 +181,7 @@ public class SwampTest {
         assertTrue(new Position(-1, 3).equals(getAssPos(res)));
     }
     @Test
-    @Tag("1-7")
+    @Tag("17-7")
     @DisplayName("Test Swamp movement of non-adj allied assassin")
     public void testAssassinSwampMovementAlliedNonAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -206,7 +206,7 @@ public class SwampTest {
         assertTrue(new Position(-1, 3).equals(getAssPos(res)));
     }
     @Test
-    @Tag("1-8")
+    @Tag("17-8")
     @DisplayName("Test Swamp movement of adj allied assassin")
     public void testAssassinSwampMovementAlliedAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -232,7 +232,7 @@ public class SwampTest {
         assertTrue(new Position(-3, 3).equals(getAssPos(res)));
     }
     @Test
-    @Tag("1-9")
+    @Tag("17-9")
     @DisplayName("Test Swamp movement of adj unallied mercenary")
     public void testMercenarySwampMovementUnalliedAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -255,7 +255,7 @@ public class SwampTest {
         assertTrue(new Position(-1, 3).equals(getMercPos(res)));
     }
     @Test
-    @Tag("1-10")
+    @Tag("17-10")
     @DisplayName("Test Swamp movement of adj unallied assassin")
     public void testAssassinSwampMovementUnalliedAdj() {
         DungeonManiaController dmc = new DungeonManiaController();
@@ -278,7 +278,7 @@ public class SwampTest {
         assertTrue(new Position(-1, 3).equals(getAssPos(res)));
     }
     @Test
-    @Tag("1-4")
+    @Tag("17-4")
     @DisplayName("Test Dijkstra weighting Assassin")
     public void testDijkstraAssassin() {
         DungeonManiaController dmc = new DungeonManiaController();

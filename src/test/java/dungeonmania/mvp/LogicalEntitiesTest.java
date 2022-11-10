@@ -14,7 +14,7 @@ import dungeonmania.util.Position;
 
 public class LogicalEntitiesTest {
     @Test
-    @Tag("4-1")
+    @Tag("20-1")
     @DisplayName("OR Test player cannot walk through an unactivated switch_door")
     public void cannotWalkClosedSwitchDoor() {
         DungeonManiaController dmc;
@@ -35,7 +35,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(3, 2)));
     }
     @Test
-    @Tag("4-2")
+    @Tag("20-2")
     @DisplayName("OR Test player can walk through an activated switch_door, switch turns light on")
     public void canWalkActivatedSwitchDoorLightOn() {
         DungeonManiaController dmc;
@@ -67,7 +67,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(3, 2)));
     }
     @Test
-    @Tag("4-3")
+    @Tag("20-3")
     @DisplayName("AND Test SwitchDoor")
     public void doorOpensIfBOTHIncomingWiresActive() {
         DungeonManiaController dmc;
@@ -99,7 +99,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "switch_door", new Position(4, 0)));
     }
     @Test
-    @Tag("4-4")
+    @Tag("20-4")
     @DisplayName("AND Test LightBulb")
     public void lightOnIfBOTHIncomingWiresActive() {
         DungeonManiaController dmc;
@@ -126,7 +126,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(4, 0)));
     }
     @Test
-    @Tag("4-5")
+    @Tag("20-5")
     @DisplayName("AND Test LightBulb ALL active")
     public void lightOnIfALLIncomingWiresActive() {
         DungeonManiaController dmc;
@@ -153,7 +153,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(4, 0)));
     }
     @Test
-    @Tag("4-6")
+    @Tag("20-6")
     @DisplayName("XOR Test LightBulb")
     public void lightOnIfOnly1IncomingWiresActive() {
         DungeonManiaController dmc;
@@ -182,7 +182,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(4, 0)));
     }
     @Test
-    @Tag("4-6")
+    @Tag("20-7")
     @DisplayName("CO_AND Test LightBulb")
     public void coAndTestDifferentSwitches() {
         DungeonManiaController dmc;
@@ -222,7 +222,7 @@ public class LogicalEntitiesTest {
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(4, 0)));
     }
     @Test
-    @Tag("4-6")
+    @Tag("20-8")
     @DisplayName("CO_AND Test LightBulb 'reactivation'")
     public void coAndTestReactivateWireFromOtherSwitch() {
         DungeonManiaController dmc;
@@ -256,5 +256,42 @@ public class LogicalEntitiesTest {
         res = dmc.tick(Direction.RIGHT);
         // assert "reactivating" conductor from another switch doesn't affect the light_bulb
         assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(4, 0)));
+    }
+    @Test
+    @Tag("20-9")
+    @DisplayName("Mixed Logic Entities Test")
+    public void logicMixed() {
+        DungeonManiaController dmc;
+        dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame(
+            "logic_mixed", "simple");
+        Position pos = TestUtils.getEntities(res, "player").get(0).getPosition();
+        assertEquals(new Position(4, 2), pos);
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(6, 0)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(6, 7)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(2, 4)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(1, 7)));
+        // activate first switch, expect co_and and xor light bulbs to activate
+        res = dmc.tick(Direction.DOWN);
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(6, 0)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(6, 7)));
+        res = dmc.tick(Direction.RIGHT);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.LEFT);
+        // activate second switch, expect or and and lightbulbs to turn on, expect co_and lightbulb to stay on, expect
+        // xor lightbulb to turn off
+        res = dmc.tick(Direction.DOWN);
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(6, 0)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(6, 7)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(2, 4)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(1, 7)));
+        res = dmc.tick(Direction.UP);
+        // deactivate first switch, expect and and co_and to turn off, expect others to stay on
+        res = dmc.tick(Direction.UP);
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(6, 0)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(6, 7)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_off", new Position(2, 4)));
+        assertEquals(true, TestUtils.entityAtPosition(res, "light_bulb_on", new Position(1, 7)));
     }
 }
