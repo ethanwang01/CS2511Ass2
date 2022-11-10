@@ -112,6 +112,7 @@ public class EntityFactory implements Serializable{
         double assassinAttack = config.optDouble("assassin_attack", Assassin.DEFAULT_ATTACK);
         int assassinBribeAmount = config.optInt("assassin_bribe_amount", Assassin.DEFAULT_BRIBE_AMOUNT);
         double assassinBribeFailRate = config.optDouble("assassin_bribe_fail_rate", Assassin.DEFAULT_BRIBE_RATE);
+        System.out.println("Reading Data: " + assassinBribeFailRate);
         double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
         int assassinBribeRadius = config.optInt("bribe_radius", Assassin.DEFAULT_BRIBE_RADIUS);
         int assassinMindControlDuration = config.optInt("mind_control_duration",

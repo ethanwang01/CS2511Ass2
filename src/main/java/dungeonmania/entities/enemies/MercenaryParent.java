@@ -56,7 +56,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     /**
      * bribe the merc
      */
-    private boolean bribe(Player player) {
+    public boolean bribe(Player player) {
         for (int i = 0; i < this.bribeAmount; i++) {
             player.use(Treasure.class);
         }
@@ -125,6 +125,8 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
                 System.out.println("follow player");
                 map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
             }
+            System.out.print("Allied: " + allied + "\n");
+            System.out.print("Turns Merc: " + mindControlDuration + "\n");
             System.out.print("Player curr: " + map.getPlayerPosition() + "\n");
             System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
             System.out.print("merc curr:   " + this.getPosition() + "\n");
