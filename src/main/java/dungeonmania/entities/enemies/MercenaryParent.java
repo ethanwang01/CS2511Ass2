@@ -56,7 +56,7 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     /**
      * bribe the merc
      */
-    private boolean bribe(Player player) {
+    public boolean bribe(Player player) {
         for (int i = 0; i < this.bribeAmount; i++) {
             player.use(Treasure.class);
         }
@@ -84,17 +84,17 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
     public void move(Game game) {
         Position nextPos;
         GameMap map = game.getMap();
-
+        System.out.println("LETS GO");
         // if !allied
         if (!isAllied()) {
              // if dijkstra path is same as position player moves to, stay
             if (map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this)
                 .equals(map.getPlayerPosition())) {
-                System.out.println("Cannot move \n");
+                // System.out.println("Cannot move \n");
                 map.moveTo(this, this.getPosition());
                 return;
             } else {
-                System.out.print("Dijk move \n");
+                // System.out.print("Dijk move \n");
                 if (this.getmoveCount() == 0) {
                     nextPos = map.dijkstraPathFind(getPosition(), map.getPlayerPosition(), this);
                     map.moveTo(this, nextPos);
@@ -109,25 +109,27 @@ public abstract class MercenaryParent extends Enemy implements Interactable {
                 // if dijkstra path is same as position player moves to, stay
                 if (map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this)
                     .equals(map.getPlayer().getPosition())) {
-                    System.out.println("Stay\n");
+                    // System.out.println("Stay\n");
                     map.moveTo(this, this.getPosition());
                 } else {
                     if (this.getmoveCount() == 0) {
-                        System.out.println("dijk move ally\n");
+                        // System.out.println("dijk move ally\n");
                         map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayerPosition(), this));
                     } else {
-                        System.out.println("swamp move\n");
+                        // System.out.println("swamp move\n");
                         map.moveTo(this, this.getPosition());
                     }
                 }
             // if curr position is adjacent to player before they move, follow player's last distinct position
             } else {
-                System.out.println("follow player");
+                // System.out.println("follow player");
                 map.moveTo(this, map.getPlayer().getPreviousDistinctPosition());
             }
-            System.out.print("Player curr: " + map.getPlayerPosition() + "\n");
-            System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
-            System.out.print("merc curr:   " + this.getPosition() + "\n");
+            // System.out.print("Allied: " + allied + "\n");
+            // System.out.print("Turns Merc: " + mindControlDuration + "\n");
+            // System.out.print("Player curr: " + map.getPlayerPosition() + "\n");
+            // System.out.print("Player prev: " + map.getPlayer().getPreviousPosition() + "\n");
+            // System.out.print("merc curr:   " + this.getPosition() + "\n");
             // System.out.print("Player prevdist: " + map.getPlayer().getPreviousDistinctPosition() + "\n");
         }
 

@@ -1,8 +1,10 @@
 package dungeonmania.response.models;
 
+import java.io.Serializable;
+
 import dungeonmania.util.Position;
 
-public final class EntityResponse {
+public final class EntityResponse implements Serializable {
     private final String id;
     private final String type;
     private final Position position;

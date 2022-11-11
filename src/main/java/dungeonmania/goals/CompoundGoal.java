@@ -1,8 +1,10 @@
 package dungeonmania.goals;
 
+import java.io.Serializable;
+
 import dungeonmania.Game;
 
-public abstract class CompoundGoal implements Goal {
+public abstract class CompoundGoal implements Goal, Serializable {
     private Goal n1;
     private Goal n2;
     private String type;

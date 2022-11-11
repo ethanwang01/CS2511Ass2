@@ -1,12 +1,13 @@
 package dungeonmania.entities;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
-public abstract class CollectableEntity implements Entity {
+public abstract class CollectableEntity implements Entity, Serializable {
 
     private Position position;
     private Position previousPosition;

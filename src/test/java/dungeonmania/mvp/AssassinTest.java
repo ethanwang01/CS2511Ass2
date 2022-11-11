@@ -190,7 +190,8 @@ public class AssassinTest {
 
         // walk into mercenary, a battle does occur
         res = dmc.tick(Direction.RIGHT);
-        assertEquals(0, res.getBattles().size());
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals(1, res.getBattles().size());
     }
 
     private Position getAssassinPos(DungeonResponse res) {

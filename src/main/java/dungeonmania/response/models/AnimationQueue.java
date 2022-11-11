@@ -1,8 +1,9 @@
 package dungeonmania.response.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AnimationQueue {
+public class AnimationQueue implements Serializable {
     private final String when;
     private final String entityId;
     private final List<String> queue;

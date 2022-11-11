@@ -1,5 +1,6 @@
 package dungeonmania.battles;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import dungeonmania.response.models.BattleResponse;
 import dungeonmania.response.models.ResponseBuilder;
 import dungeonmania.util.NameConverter;
 
-public class BattleFacade {
+public class BattleFacade implements Serializable {
     private List<BattleResponse> battleResponses = new ArrayList<>();
 
     public void battle(Game game, Player player, Enemy enemy) {
