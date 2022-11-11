@@ -60,4 +60,9 @@ public class GraphNode implements Serializable {
     public Position getPosition() {
         return position;
     }
+
+    @Override
+    public String toString() {
+        return "GraphNode [position=" + position + ", entities=" + entities + ", weight=" + weight + "]";
+    }
 }

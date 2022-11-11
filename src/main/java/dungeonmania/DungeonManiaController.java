@@ -9,6 +9,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -33,12 +34,15 @@ import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.goals.Goal;
+import dungeonmania.map.GraphNode;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.response.models.ResponseBuilder;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
+import dungeonmania.util.Position;
 
 public class DungeonManiaController {
+    private ArrayList<String> savedGameNames = new ArrayList<String>();
     private ArrayList<String> savedGames = new ArrayList<String>();
     private Game game = null;
     // private DungeonResponse lastTickResponse;
@@ -146,7 +150,8 @@ public class DungeonManiaController {
             out.writeObject(game.getId());
             out.writeObject(game.getName());
             out.writeObject(game.getGoals());
-            out.writeObject(game.getMap().getNodes());
+            out.writeObject(new ArrayList<Position> (game.getMap().getNodes().keySet()));
+            out.writeObject(new ArrayList<GraphNode> (game.getMap().getNodes().values()));
             out.writeObject(game.getPlayer());
             out.writeObject(game.getBattleFacade());
             out.writeObject(game.getInitialTreasureCount());
@@ -155,9 +160,9 @@ public class DungeonManiaController {
             out.writeObject(game.isInTick());
             out.writeObject(game.getTickCount());
             // System.out.println("HERE");
-            // out.writeObject(game.getSub().toArray());
+            // out.writeObject(new ArrayList<ComparableCallback>(game.getSub()));
             // System.out.println("HEREc");
-            // out.writeObject(game.getAddingSub().toArray());
+            // out.writeObject(new ArrayList<ComparableCallback>(game.getAddingSub()));
             // System.out.println("HEREcc");
             out.flush();
             out.close();
@@ -222,16 +227,25 @@ public class DungeonManiaController {
      */
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
-            System.out.println("DEBUG HERE");
+            // System.out.println("DEBUG HERE");
             FileInputStream file = new FileInputStream(name);
-            System.out.println("DEBUG HERE");
+            // System.out.println("DEBUG HERE");
             ObjectInputStream in = new ObjectInputStream(file);
-            System.out.println("DEBUG HERE");
+            // System.out.prinssdstln("DEBUG HERE");
             game.setId((String) in.readObject());
-            System.out.println("DEBUG HERE");
+            // System.out.println("DEBUG HERE");
             game.setName((String) in.readObject());
             game.setGoals((Goal) in.readObject());
-            Object mapNodes = in.readObject();
+
+            List <Position> mapKeys =  (List <Position>) in.readObject();
+            List <GraphNode> graphNodes = (List <GraphNode>) in.readObject();
+
+            System.out.println("LOADING: " + graphNodes);
+
+            Map<Position, GraphNode> newNodes = new HashMap<>();
+            for (int i = 0; i < mapKeys.size(); i++) newNodes.put(mapKeys.get(i), graphNodes.get(i));
+
+            game.getMap().setNodes(newNodes);
 
             game.setPlayer((Player) in.readObject());
             game.setBattleFacade((BattleFacade) in.readObject());
@@ -244,10 +258,11 @@ public class DungeonManiaController {
 
             in.close();
             file.close();
-            System.out.println("Loaded game");
+            System.out.println("Loaded game from :" + name);
         } catch (Exception x) {
             System.out.println("Failed to load game");
         }
+        game.getMap().init();
         return ResponseBuilder.getDungeonResponse(game);
     }
 

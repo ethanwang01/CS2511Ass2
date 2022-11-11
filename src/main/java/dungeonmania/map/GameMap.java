@@ -71,6 +71,7 @@ public class GameMap implements Serializable {
 
     private void initRegisterMovables() {
         List<Enemy> enemies = getEntities(Enemy.class);
+        System.out.println(enemies);
         enemies.forEach(e -> {
             game.register(() -> e.move(game), Game.AI_MOVEMENT, e.getId());
         });
