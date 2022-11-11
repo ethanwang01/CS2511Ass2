@@ -1,9 +1,10 @@
 package dungeonmania.response.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class BattleResponse {
+public final class BattleResponse implements Serializable {
     private final String enemy;
     private final double initialPlayerHealth;
     private final double initialEnemyHealth;

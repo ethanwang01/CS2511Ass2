@@ -1,5 +1,6 @@
 package dungeonmania.response.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +12,7 @@ import dungeonmania.entities.Interactable;
 import dungeonmania.entities.inventory.Inventory;
 import dungeonmania.util.NameConverter;
 
-public class ResponseBuilder {
+public class ResponseBuilder implements Serializable {
     public static DungeonResponse getDungeonResponse(Game game) {
         List<EntityResponse> entityResponse = new ArrayList<>();
         game.getMap().getEntities().forEach(e -> {

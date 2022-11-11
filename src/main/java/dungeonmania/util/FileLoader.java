@@ -1,13 +1,14 @@
 package dungeonmania.util;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
 
-public final class FileLoader {
+public final class FileLoader implements Serializable {
     /**
      * Loads a resource file given a certain path that is relative to resources/
      * for example `/dungeons/maze.json`. Will add a `/` prefix to path if it's not

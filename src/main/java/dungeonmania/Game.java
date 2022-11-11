@@ -1,5 +1,6 @@
 package dungeonmania;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.UUID;
@@ -20,7 +21,7 @@ import dungeonmania.goals.Goal;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Direction;
 
-public class Game {
+public class Game implements Serializable {
     private String id;
     private String name;
     private Goal goals;
@@ -31,6 +32,7 @@ public class Game {
     private int killedEnemies;
     private EntityFactory entityFactory;
     private boolean isInTick = false;
+
     public static final int PLAYER_MOVEMENT = 0;
     public static final int PLAYER_MOVEMENT_CALLBACK = 1;
     public static final int AI_MOVEMENT = 2;
@@ -233,6 +235,10 @@ public class Game {
         return initialTreasureCount;
     }
 
+    public void setInitialTreasureCount(int count) {
+        this.initialTreasureCount = count;
+    }
+
     public int getKilledEnemies() {
         return killedEnemies;
     }
@@ -241,4 +247,27 @@ public class Game {
         this.killedEnemies = killedEnemies;
     }
 
+    public boolean isInTick() {
+        return isInTick;
+    }
+
+    public void setIsInTick(Boolean b) {
+        this.isInTick = b;
+    }
+
+    public int getTickCount() {
+        return tickCount;
+    }
+
+    public void setTickCount(int i) {
+        this.tickCount = i;
+    }
+
+    public PriorityQueue<ComparableCallback> getSub() {
+        return sub;
+    }
+
+    public PriorityQueue<ComparableCallback> getAddingSub() {
+        return addingSub;
+    }
 }

@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ import dungeonmania.util.FileLoader;
  * @author      Webster Zhang
  * @author      Tina Ji
  */
-public class GameBuilder {
+public class GameBuilder implements Serializable {
     private String configName;
     private String dungeonName;
 

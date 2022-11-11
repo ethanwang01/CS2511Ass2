@@ -26,19 +26,24 @@ public class Assassin extends MercenaryParent {
         super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
         this.bribeAmount = bribeAmount;
         this.bribeRadius = bribeRadius;
+        this.bribeFailRate = bribeFailRate;
         random = new Random(DEFAULT_SEED);
     }
 
     public Assassin(Position position, double health, double attack, int bribeAmount, int bribeRadius,
             double bribeFailRate, long seed, int mindControlDuration) {
         super(position, health, attack, bribeAmount, bribeRadius, mindControlDuration);
+        this.bribeFailRate = bribeFailRate;
         random = new Random(seed);
     }
 
-    private boolean bribe(Player player) {
+    @Override
+    public boolean bribe(Player player) {
         for (int i = 0; i < bribeAmount; i++) {
             player.use(Treasure.class);
         }
+        double tmp = random.nextFloat();
+        System.out.println(tmp + ", fail rate: " + bribeFailRate);
         if (random.nextFloat() > bribeFailRate) {
             return true;
         }
@@ -88,7 +93,7 @@ public class Assassin extends MercenaryParent {
     //                if (this.getmoveCount() == 0) {
     //                    System.out.println("dijk move ally\n");
     //                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(),
-                            // map.getPlayer().getPosition(), this));
+                        // map.getPlayer().getPosition(), this));
     //                } else {
     //                    System.out.println("swamp move\n");
     //                    map.moveTo(this, this.getPosition());

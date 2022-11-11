@@ -14,6 +14,7 @@ import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.util.Position;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 
-public class EntityFactory {
+public class EntityFactory implements Serializable {
     private JSONObject config;
     private Random ranGen = new Random();
 
@@ -113,6 +114,7 @@ public class EntityFactory {
         double assassinAttack = config.optDouble("assassin_attack", Assassin.DEFAULT_ATTACK);
         int assassinBribeAmount = config.optInt("assassin_bribe_amount", Assassin.DEFAULT_BRIBE_AMOUNT);
         double assassinBribeFailRate = config.optDouble("assassin_bribe_fail_rate", Assassin.DEFAULT_BRIBE_RATE);
+        System.out.println("Reading Data: " + assassinBribeFailRate);
         double assassinHealth = config.optDouble("assassin_health", Assassin.DEFAULT_HEALTH);
         int assassinBribeRadius = config.optInt("bribe_radius", Assassin.DEFAULT_BRIBE_RADIUS);
         int assassinMindControlDuration = config.optInt("mind_control_duration",
@@ -212,5 +214,13 @@ public class EntityFactory {
         default:
             return null;
         }
+    }
+
+    public Random getRandom() {
+        return ranGen;
+    }
+
+    public void setRandom(Random r) {
+        this.ranGen = r;
     }
 }

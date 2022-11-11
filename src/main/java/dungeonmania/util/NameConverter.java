@@ -1,5 +1,6 @@
 package dungeonmania.util;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -9,7 +10,7 @@ import dungeonmania.entities.Portal;
 import dungeonmania.entities.logical.LightBulb;
 import dungeonmania.entities.logical.SwitchDoor;
 
-public class NameConverter {
+public class NameConverter implements Serializable {
     public static String toSnakeCase(Entity entity) {
         String nameBasic = toSnakeCase(entity.getClass().getSimpleName());
         if (entity instanceof Portal) {

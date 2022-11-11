@@ -1,5 +1,6 @@
 package dungeonmania.map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
 
-public class GameMap {
+public class GameMap implements Serializable {
     private Game game;
     private Map<Position, GraphNode> nodes = new HashMap<>();
     private Player player;
@@ -127,6 +128,7 @@ public class GameMap {
 
     private void initRegisterMovables() {
         List<Enemy> enemies = getEntities(Enemy.class);
+        System.out.println(enemies);
         enemies.forEach(e -> {
             game.register(() -> e.move(game), Game.AI_MOVEMENT, e.getId());
         });
@@ -335,5 +337,13 @@ public class GameMap {
 
     public Position getPlayerPosition() {
         return player.getPosition();
+    }
+
+    public Map<Position, GraphNode> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(Map<Position, GraphNode> nodes) {
+        this.nodes = nodes;
     }
 }
