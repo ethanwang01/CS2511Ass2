@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 
-public class EntityFactory implements Serializable{
+public class EntityFactory implements Serializable {
     private JSONObject config;
     private Random ranGen = new Random();
 

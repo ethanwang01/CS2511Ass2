@@ -2,11 +2,8 @@ package dungeonmania.entities.enemies;
 
 import java.util.Random;
 
-import dungeonmania.Game;
-import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.collectables.Treasure;
-import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
 public class Assassin extends MercenaryParent {
@@ -95,7 +92,8 @@ public class Assassin extends MercenaryParent {
     //            } else {
     //                if (this.getmoveCount() == 0) {
     //                    System.out.println("dijk move ally\n");
-    //                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(), map.getPlayer().getPosition(), this));
+    //                    map.moveTo(this, map.dijkstraPathFind(this.getPosition(),
+                        // map.getPlayer().getPosition(), this));
     //                } else {
     //                    System.out.println("swamp move\n");
     //                    map.moveTo(this, this.getPosition());

@@ -36,7 +36,7 @@ public class PersistanceTest {
         assertTrue(TestUtils.entityResponsesEqual(expectedPlayer, actualPlayer));
 
         // Save Game
-        assertDoesNotThrow(()-> dmc.saveGame("persistTest"));
+        assertDoesNotThrow(() -> dmc.saveGame("persistTest"));
 
         // Start a new Game
         initDungonRes = dmc.newGame(
@@ -172,7 +172,7 @@ public class PersistanceTest {
         res = dmc.tick(TestUtils.getFirstItemId(res, "invincibility_potion"));
 
         // Save game
-        assertDoesNotThrow(()-> dmc.saveGame("savePotions"));
+        assertDoesNotThrow(() -> dmc.saveGame("savePotions"));
         // newGame
         res = dmc.newGame("d_BuildablesTest_BuildBow", "c_potionsTest_invincibilityDuration");
 

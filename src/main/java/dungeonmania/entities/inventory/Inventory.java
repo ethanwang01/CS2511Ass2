@@ -19,7 +19,7 @@ import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.Wood;
 
-public class Inventory implements Serializable{
+public class Inventory implements Serializable {
     private List<InventoryItem> items = new ArrayList<>();
 
     public boolean add(InventoryItem item) {
