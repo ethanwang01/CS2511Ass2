@@ -7,6 +7,8 @@ import dungeonmania.entities.buildables.Sceptre;
 import dungeonmania.entities.buildables.Shield;
 import dungeonmania.entities.collectables.*;
 import dungeonmania.entities.enemies.*;
+import dungeonmania.entities.logical.LightBulb;
+import dungeonmania.entities.logical.SwitchDoor;
 import dungeonmania.map.GameMap;
 import dungeonmania.entities.collectables.potions.InvincibilityPotion;
 import dungeonmania.entities.collectables.potions.InvisibilityPotion;
@@ -203,6 +205,12 @@ public class EntityFactory implements Serializable {
             return buildSceptre();
         case "midnight_armour":
             return buildMidnightArmour();
+        case "wire":
+            return new Wire(pos);
+        case "light_bulb_off":
+            return new LightBulb(pos, jsonEntity.getString("logic"));
+        case "switch_door":
+            return new SwitchDoor(pos, jsonEntity.getString("logic"));
         default:
             return null;
         }
